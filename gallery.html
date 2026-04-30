@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フォトギャラリー | 三春ミニバスケットボールスポーツ少年団</title>
+  <meta name="description" content="三春ミニバスケットボールスポーツ少年団の活動写真ギャラリー。練習・試合・イベントの様子をご覧ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gallery-page-hero {
+      background: linear-gradient(rgba(8,8,20,0.7), rgba(8,8,20,0.85)),
+                  url('images/hero-sport.jpg') center/cover no-repeat;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .gallery-page-hero .section-label { margin-bottom: 8px; }
+    .gallery-page-hero h1 {
+      font-size: clamp(28px,5vw,48px);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+
+    /* フィルター */
+    .gallery-filter {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 40px 0 32px;
+    }
+    .filter-btn {
+      padding: 8px 22px;
+      border-radius: 50px;
+      border: 1.5px solid #ddd;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: inherit;
+      color: #555;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+
+    /* グリッド */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media(max-width:700px){ .photo-grid { grid-template-columns: repeat(2,1fr); gap:8px; } }
+    @media(max-width:400px){ .photo-grid { grid-template-columns: 1fr; } }
+
+    .photo-card {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #111;
+    }
+    .photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-card:hover img { transform: scale(1.07); }
+    .photo-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 50%, rgba(0,0,0,0.7));
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .photo-card:hover .photo-card-overlay { opacity: 1; }
+    .photo-card-label {
+      font-size: 13px;
+      color: #fff;
+      font-weight: 700;
+    }
+    .photo-card-tag {
+      position: absolute;
+      top: 10px; left: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 50px;
+      color: #fff;
+    }
+    .tag-boys  { background: rgba(59,130,246,0.85); }
+    .tag-girls { background: rgba(236,72,153,0.75); }
+    .tag-all   { background: rgba(232,119,60,0.85); }
+
+    /* ライトボックス */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-size: 36px;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+    }
+    .lightbox-caption {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      font-size: 40px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0 20px;
+      transition: color 0.2s;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 0; }
+    .lightbox-next { right: 0; }
+
+    /* アップロード案内 */
+    .gallery-upload-note {
+      text-align: center;
+      padding: 40px 0 20px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="18" cy="18" r="16" stroke="#E8773C" stroke-width="2.5"/><path d="M18 2C18 2 12 9 12 18C12 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M18 2C18 2 24 9 24 18C24 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M2 18H34" stroke="#E8773C" stroke-width="2"/></svg></div>
+      <div class="logo-text">
+        <div class="en">MIHARU MINI BASKETBALL</div>
+        <div class="ja">三春ミニバスケットボールスポーツ少年団</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html#news">お知らせ</a>
+      <a href="index.html#teams">チーム</a>
+      <a href="index.html#schedule">スケジュール</a>
+      <a href="gallery.html" style="color:var(--orange)">ギャラリー</a>
+      <a href="index.html#contact">お問い合わせ</a>
+      <a href="index.html#join" class="btn-join">入団案内</a>
+    </nav>
+    <div class="hamburger" role="button" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu">
+  <a href="index.html#news">お知らせ</a>
+  <a href="index.html#teams">チーム紹介</a>
+  <a href="index.html#schedule">スケジュール</a>
+  <a href="gallery.html">ギャラリー</a>
+  <a href="index.html#contact">お問い合わせ</a>
+  <a href="index.html#join" class="btn-join-m">入団案内</a>
+</nav>
+
+<!-- ヒーロー -->
+<div class="gallery-page-hero">
+  <div>
+    <div class="section-label">PHOTO GALLERY</div>
+    <h1>フォトギャラリー</h1>
+  </div>
+</div>
+
+<!-- メイン -->
+<main style="background:#fff; padding-bottom:80px;">
+  <div class="container">
+
+    <!-- フィルター -->
+    <div class="gallery-filter">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="boys">男子チーム</button>
+      <button class="filter-btn" data-filter="girls">女子チーム</button>
+      <button class="filter-btn" data-filter="event">大会・イベント</button>
+      <button class="filter-btn" data-filter="practice">練習</button>
+    </div>
+
+    <!-- 写真グリッド -->
+    <div class="photo-grid" id="photoGrid">
+
+      <div class="photo-card" data-tag="event" data-label="2026年 春季大会" data-src="images/gallery1.jpg">
+        <img src="images/gallery1.jpg" alt="春季大会" loading="lazy">
+        <span class="photo-card-tag tag-all">大会</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">2026年 春季大会</div></div>
+      </div>
+
+      <div class="photo-card" data-tag="practice" data-label="練習風景" data-src="images/gallery2.jpg">
+        <img src="images/gallery2.jpg" alt="練習風景" loading="lazy">
+        <span class="photo-card-tag tag-all">練習</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">練習風景</div></div>
+      </div>
+
+      <div class="photo-card" data-tag="girls" data-label="女子チーム 練習" data-src="images/gallery3.jpg">
+        <img src="images/gallery3.jpg" alt="女子チーム練習" loading="lazy">
+        <span class="photo-card-tag tag-girls">女子</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 練習</div></div>
+      </div>
+
+      <div class="photo-card" data-tag="boys" data-label="男子チーム 試合" data-src="images/gallery4.jpg">
+        <img src="images/gallery4.jpg" alt="男子チーム試合" loading="lazy">
+        <span class="photo-card-tag tag-boys">男子</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">男子チーム 試合</div></div>
+      </div>
+
+      <div class="photo-card" data-tag="event" data-label="チーム集合写真" data-src="images/gallery5.jpg">
+        <img src="images/gallery5.jpg" alt="チーム集合写真" loading="lazy">
+        <span class="photo-card-tag tag-all">イベント</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">チーム集合写真</div></div>
+      </div>
+
+      <div class="photo-card" data-tag="practice" data-label="バスケットボール" data-src="images/gallery-basketball.jpg">
+        <img src="images/gallery-basketball.jpg" alt="バスケットボール" loading="lazy">
+        <span class="photo-card-tag tag-all">練習</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">バスケットボール</div></div>
+      </div>
+
+    </div>
+
+    <p class="gallery-upload-note">※ 練習・試合の写真は随時追加予定です</p>
+  </div>
+</main>
+
+<!-- ライトボックス -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">×</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lightbox-caption" id="lbCaption"></div>
+  <button class="lightbox-nav lightbox-next" id="lbNext">&#8250;</button>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--primary);padding:40px 0;text-align:center;">
+  <div class="container">
+    <a href="index.html" style="color:rgba(255,255,255,0.5);font-size:13px;">← トップページに戻る</a>
+    <div style="color:rgba(255,255,255,0.2);font-size:12px;margin-top:16px;">© 2026 三春ミニバスケットボールスポーツ少年団</div>
+  </div>
+</footer>
+
+<script>
+/* ハンバーガー */
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+/* ヘッダースクロール */
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* フィルター */
+const cards = [...document.querySelectorAll('.photo-card')];
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.tag === f) ? '' : 'none';
+    });
+  });
+});
+
+/* ライトボックス */
+let currentIdx = 0;
+const visibleCards = () => cards.filter(c => c.style.display !== 'none');
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+
+function openLb(idx) {
+  const vc = visibleCards();
+  currentIdx = idx;
+  lbImg.src = vc[idx].dataset.src;
+  lbCaption.textContent = vc[idx].dataset.label;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+cards.forEach((c, i) => c.addEventListener('click', () => openLb(cards.indexOf(c))));
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => {
+  const vc = visibleCards();
+  currentIdx = (currentIdx - 1 + vc.length) % vc.length;
+  lbImg.src = vc[currentIdx].dataset.src;
+  lbCaption.textContent = vc[currentIdx].dataset.label;
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  const vc = visibleCards();
+  currentIdx = (currentIdx + 1) % vc.length;
+  lbImg.src = vc[currentIdx].dataset.src;
+  lbCaption.textContent = vc[currentIdx].dataset.label;
+});
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+</script>
+</body>
+</html>
