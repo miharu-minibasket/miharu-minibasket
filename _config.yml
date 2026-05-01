@@ -1,0 +1,39 @@
+title: 三春ミニバスケットボールスポーツ少年団
+description: 福島県三春町のミニバスケットボールチーム。男子・女子チームがあり、小学1年生から6年生まで随時入団募集中。
+url: "https://miharu-minibasket.netlify.app"
+baseurl: ""
+
+# ビルド設定
+markdown: kramdown
+permalink: pretty
+
+# 除外ファイル
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# コレクション定義
+collections:
+  news:
+    output: false
+    sort_by: date
+  gallery:
+    output: false
+  coaches:
+    output: false
+  sponsors:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: "news"
+    values:
+      layout: "none"
+  - scope:
+      path: ""
+      type: "gallery"
+    values:
+      layout: "none"
