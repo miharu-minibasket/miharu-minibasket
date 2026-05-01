@@ -26,14 +26,3 @@ collections:
   sponsors:
     output: false
 
-defaults:
-  - scope:
-      path: ""
-      type: "news"
-    values:
-      layout: "none"
-  - scope:
-      path: ""
-      type: "gallery"
-    values:
-      layout: "none"
