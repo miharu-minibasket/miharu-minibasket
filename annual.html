@@ -1,248 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>年間スケジュール | 三春ミニバスケットボールスポーツ少年団</title>
-  <meta name="description" content="三春ミニバスケットボールスポーツ少年団の年間活動スケジュール。大会・練習会・イベントの予定をご確認ください。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* ヒーロー */
-    .annual-hero {
-      background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
-                  url('images/hero-sport.jpg') center/cover no-repeat;
-      height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding-top: 80px;
-    }
-    .annual-hero .section-label { margin-bottom: 8px; }
-    .annual-hero h1 {
-      font-size: clamp(28px,5vw,48px);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 0.04em;
-    }
-    .annual-hero p {
-      color: rgba(255,255,255,0.6);
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* フィルター */
-    .annual-filter {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding: 40px 0 28px;
-    }
-    .filter-btn {
-      padding: 8px 22px;
-      border-radius: 50px;
-      border: 1.5px solid #ddd;
-      background: transparent;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.25s;
-      font-family: inherit;
-      color: #555;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: #fff;
-    }
-
-    /* 月ごとブロック */
-    .annual-month {
-      margin-bottom: 48px;
-    }
-    .month-heading {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #f0f0f0;
-    }
-    .month-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      line-height: 1;
-      color: var(--orange);
-    }
-    .month-ja {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-    .month-count {
-      font-size: 12px;
-      color: #aaa;
-      margin-left: auto;
-    }
-
-    /* イベントリスト */
-    .event-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .event-item {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 20px;
-      border-radius: 10px;
-      background: #fafafa;
-      border-left: 4px solid #ddd;
-      transition: background 0.2s;
-    }
-    .event-item:hover { background: #f3f3f3; }
-    .event-item[data-tag="boys"]  { border-left-color: #3b82f6; }
-    .event-item[data-tag="girls"] { border-left-color: #ec4899; }
-    .event-item[data-tag="event"] { border-left-color: var(--orange); }
-    .event-item[data-tag="all"]   { border-left-color: #22c55e; }
-
-    .event-date {
-      font-size: 13px;
-      font-weight: 700;
-      color: #444;
-      white-space: nowrap;
-    }
-    .event-date .day {
-      display: block;
-      font-size: 11px;
-      font-weight: 500;
-      color: #999;
-      margin-top: 2px;
-    }
-    .event-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.4;
-    }
-    .event-sub {
-      font-size: 12px;
-      color: #888;
-      margin-top: 3px;
-      font-weight: 400;
-    }
-    .event-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 3px 10px;
-      border-radius: 50px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .badge-boys  { background: #dbeafe; color: #1d4ed8; }
-    .badge-girls { background: #fce7f3; color: #be185d; }
-    .badge-event { background: #fff0e6; color: #c05d1c; }
-    .badge-all   { background: #dcfce7; color: #15803d; }
-
-    /* 空月 */
-    .no-event {
-      color: #ccc;
-      font-size: 13px;
-      padding: 12px 20px;
-    }
-
-    /* 注記 */
-    .annual-note {
-      text-align: center;
-      color: #aaa;
-      font-size: 13px;
-      padding: 24px 0 8px;
-    }
-
-    /* 印刷ボタン */
-    .annual-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .btn-print {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 6px;
-      border: 1.5px solid #ddd;
-      background: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      color: #555;
-      transition: all 0.2s;
-    }
-    .btn-print:hover { border-color: var(--orange); color: var(--orange); }
-
-    @media(max-width:640px) {
-      .event-item {
-        grid-template-columns: 60px 1fr;
-        gap: 10px;
-      }
-      .event-badge { display: none; }
-      .month-num { font-size: 38px; }
-    }
-    @media print {
-      header, footer, .annual-filter, .annual-actions { display: none !important; }
-      .annual-hero { height: auto; padding: 20px; }
-      body { font-size: 12px; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- HEADER -->
-<header id="header">
-  <div class="container header-inner">
-    <a href="index.html" class="logo">
-      <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="18" cy="18" r="16" stroke="#E8773C" stroke-width="2.5"/><path d="M18 2C18 2 12 9 12 18C12 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M18 2C18 2 24 9 24 18C24 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M2 18H34" stroke="#E8773C" stroke-width="2"/></svg></div>
-      <div class="logo-text">
-        <div class="en">MIHARU MINI BASKETBALL</div>
-        <div class="ja">三春ミニバスケットボールスポーツ少年団</div>
-      </div>
-    </a>
-    <nav class="nav">
-      <a href="index.html#news">お知らせ</a>
-      <a href="index.html#teams">チーム</a>
-      <a href="index.html#schedule">スケジュール</a>
-      <a href="gallery.html">ギャラリー</a>
-      <a href="annual.html" style="color:var(--orange)">年間予定</a>
-      <a href="index.html#contact">お問い合わせ</a>
-      <a href="index.html#join" class="btn-join">入団案内</a>
-    </nav>
-    <div class="hamburger" role="button" aria-label="メニューを開く">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</header>
-
-<nav class="mobile-menu">
-  <a href="index.html#news">お知らせ</a>
-  <a href="index.html#teams">チーム紹介</a>
-  <a href="index.html#schedule">スケジュール</a>
-  <a href="gallery.html">ギャラリー</a>
-  <a href="annual.html">年間予定</a>
-  <a href="index.html#contact">お問い合わせ</a>
-  <a href="index.html#join" class="btn-join-m">入団案内</a>
-</nav>
+---
+layout: default
+title: "年間スケジュール"
+description: "三春ミニバスケットボールスポーツ少年団の年間活動スケジュール。大会・練習会・イベントの予定をご確認ください。"
+extra_css: /css/annual.css
+---
 
 <!-- ヒーロー -->
 <div class="annual-hero">
@@ -286,27 +47,18 @@
         </div>
         <div class="event-list">
           <div class="event-item" data-tag="event">
-            <div class="event-date">4/5〜6<span class="day">日</span></div>
-            <div>
-              <div class="event-title">福島県春季ミニバスケットボール選手権大会</div>
-              <div class="event-sub">会場：福島市</div>
-            </div>
+            <div class="event-date">4/5〜6<span class="day">土・日</span></div>
+            <div><div class="event-title">福島県春季ミニバスケットボール選手権大会</div><div class="event-sub">会場：福島市</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">4/12<span class="day">日</span></div>
-            <div>
-              <div class="event-title">2026年度 保護者会・チーム総会</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">2026年度 保護者会・チーム総会</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">4/19<span class="day">日</span></div>
-            <div>
-              <div class="event-title">新入団員 体験練習会</div>
-              <div class="event-sub">未経験・体験希望者歓迎</div>
-            </div>
+            <div><div class="event-title">新入団員 体験練習会</div><div class="event-sub">未経験・体験希望者歓迎</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
         </div>
@@ -322,18 +74,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="event">
             <div class="event-date">5/3〜4<span class="day">日・月祝</span></div>
-            <div>
-              <div class="event-title">田村地区ミニバスケットボール交流大会</div>
-              <div class="event-sub">会場：田村市総合体育館</div>
-            </div>
+            <div><div class="event-title">田村地区ミニバスケットボール交流大会</div><div class="event-sub">会場：田村市総合体育館</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
           <div class="event-item" data-tag="boys">
             <div class="event-date">5/17〜18<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【男子】郡山地区招待大会</div>
-              <div class="event-sub">会場：郡山市</div>
-            </div>
+            <div><div class="event-title">【男子】郡山地区招待大会</div><div class="event-sub">会場：郡山市</div></div>
             <span class="event-badge badge-boys">男子</span>
           </div>
         </div>
@@ -348,19 +94,13 @@
         </div>
         <div class="event-list">
           <div class="event-item" data-tag="event">
-            <div class="event-date">6/7〜8<span class="day">日</span></div>
-            <div>
-              <div class="event-title">福島県ミニバスケットボール選手権大会（予選）</div>
-              <div class="event-sub">会場：未定</div>
-            </div>
+            <div class="event-date">6/7〜8<span class="day">土・日</span></div>
+            <div><div class="event-title">福島県ミニバスケットボール選手権大会（予選）</div><div class="event-sub">会場：未定</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
           <div class="event-item" data-tag="girls">
             <div class="event-date">6/21〜22<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【女子】田村地区招待大会</div>
-              <div class="event-sub">会場：三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">【女子】田村地区招待大会</div><div class="event-sub">会場：三春町町民第二体育館</div></div>
             <span class="event-badge badge-girls">女子</span>
           </div>
         </div>
@@ -376,18 +116,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="all">
             <div class="event-date">7/19〜20<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">夏合宿（1泊2日）</div>
-              <div class="event-sub">場所：調整中</div>
-            </div>
+            <div><div class="event-title">夏合宿（1泊2日）</div><div class="event-sub">場所：調整中</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="event">
             <div class="event-date">7/26〜27<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">福島県ミニバスケットボール選手権大会（本戦）</div>
-              <div class="event-sub">会場：福島市</div>
-            </div>
+            <div><div class="event-title">福島県ミニバスケットボール選手権大会（本戦）</div><div class="event-sub">会場：福島市</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
         </div>
@@ -403,10 +137,7 @@
         <div class="event-list">
           <div class="event-item" data-tag="all">
             <div class="event-date">8/1〜31<span class="day">夏季</span></div>
-            <div>
-              <div class="event-title">夏季休暇（練習お休み期間）</div>
-              <div class="event-sub">※ 合同練習等は別途お知らせ</div>
-            </div>
+            <div><div class="event-title">夏季休暇（練習お休み期間）</div><div class="event-sub">※ 合同練習等は別途お知らせ</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
         </div>
@@ -422,18 +153,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="all">
             <div class="event-date">9/7<span class="day">日</span></div>
-            <div>
-              <div class="event-title">練習再開・シーズン後半スタート</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">練習再開・シーズン後半スタート</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="event">
             <div class="event-date">9/20〜21<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">秋季地区交流大会</div>
-              <div class="event-sub">会場：未定</div>
-            </div>
+            <div><div class="event-title">秋季地区交流大会</div><div class="event-sub">会場：未定</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
         </div>
@@ -449,18 +174,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="boys">
             <div class="event-date">10/4〜5<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【男子】秋季招待大会</div>
-              <div class="event-sub">会場：調整中</div>
-            </div>
+            <div><div class="event-title">【男子】秋季招待大会</div><div class="event-sub">会場：調整中</div></div>
             <span class="event-badge badge-boys">男子</span>
           </div>
           <div class="event-item" data-tag="girls">
             <div class="event-date">10/18〜19<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【女子】秋季招待大会</div>
-              <div class="event-sub">会場：調整中</div>
-            </div>
+            <div><div class="event-title">【女子】秋季招待大会</div><div class="event-sub">会場：調整中</div></div>
             <span class="event-badge badge-girls">女子</span>
           </div>
         </div>
@@ -475,19 +194,13 @@
         </div>
         <div class="event-list">
           <div class="event-item" data-tag="event">
-            <div class="event-date">11/1〜3<span class="day">日</span></div>
-            <div>
-              <div class="event-title">東北ブロックミニバスケットボール大会（予選）</div>
-              <div class="event-sub">会場：仙台市（予定）</div>
-            </div>
+            <div class="event-date">11/1〜3<span class="day">土〜祝</span></div>
+            <div><div class="event-title">東北ブロックミニバスケットボール大会（予選）</div><div class="event-sub">会場：仙台市（予定）</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">11/23<span class="day">日・祝</span></div>
-            <div>
-              <div class="event-title">チームOB・保護者交流試合</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">チームOB・保護者交流試合</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
         </div>
@@ -503,18 +216,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="event">
             <div class="event-date">12/6〜7<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">福島県ミニバスケットボール新人大会</div>
-              <div class="event-sub">会場：未定</div>
-            </div>
+            <div><div class="event-title">福島県ミニバスケットボール新人大会</div><div class="event-sub">会場：未定</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">12/23<span class="day">火</span></div>
-            <div>
-              <div class="event-title">年末お楽しみ会・練習納め</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">年末お楽しみ会・練習納め</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
         </div>
@@ -530,18 +237,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="all">
             <div class="event-date">1/10<span class="day">土</span></div>
-            <div>
-              <div class="event-title">練習始め・新年初練習</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">練習始め・新年初練習</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="event">
             <div class="event-date">1/17〜18<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">田村地区新人大会</div>
-              <div class="event-sub">会場：調整中</div>
-            </div>
+            <div><div class="event-title">田村地区新人大会</div><div class="event-sub">会場：調整中</div></div>
             <span class="event-badge badge-event">大会</span>
           </div>
         </div>
@@ -557,18 +258,12 @@
         <div class="event-list">
           <div class="event-item" data-tag="boys">
             <div class="event-date">2/7〜8<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【男子】卒業記念大会</div>
-              <div class="event-sub">会場：調整中</div>
-            </div>
+            <div><div class="event-title">【男子】卒業記念大会</div><div class="event-sub">会場：調整中</div></div>
             <span class="event-badge badge-boys">男子</span>
           </div>
           <div class="event-item" data-tag="girls">
             <div class="event-date">2/21〜22<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">【女子】卒業記念大会</div>
-              <div class="event-sub">会場：調整中</div>
-            </div>
+            <div><div class="event-title">【女子】卒業記念大会</div><div class="event-sub">会場：調整中</div></div>
             <span class="event-badge badge-girls">女子</span>
           </div>
         </div>
@@ -584,26 +279,17 @@
         <div class="event-list">
           <div class="event-item" data-tag="all">
             <div class="event-date">3/8<span class="day">日</span></div>
-            <div>
-              <div class="event-title">卒団式・6年生送る会</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">卒団式・6年生送る会</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">3/21〜22<span class="day">土・日</span></div>
-            <div>
-              <div class="event-title">年度末ファミリー交流試合</div>
-              <div class="event-sub">三春町町民第二体育館</div>
-            </div>
+            <div><div class="event-title">年度末ファミリー交流試合</div><div class="event-sub">三春町町民第二体育館</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
           <div class="event-item" data-tag="all">
             <div class="event-date">3/31<span class="day">火</span></div>
-            <div>
-              <div class="event-title">2026年度 活動終了</div>
-              <div class="event-sub">翌年度は4月より開始予定</div>
-            </div>
+            <div><div class="event-title">2026年度 活動終了</div><div class="event-sub">翌年度は4月より開始予定</div></div>
             <span class="event-badge badge-all">全体</span>
           </div>
         </div>
@@ -611,41 +297,18 @@
 
     </div><!-- /scheduleBody -->
 
-    <p class="annual-note">※ 日程・会場は変更になる場合があります。最新情報はお知らせをご確認ください。<br>お問い合わせは <a href="index.html#contact" style="color:var(--orange)">こちら</a> から。</p>
+    <p class="annual-note">※ 日程・会場は変更になる場合があります。最新情報はお知らせをご確認ください。<br>お問い合わせは <a href="{{ '/#contact' | relative_url }}" style="color:var(--orange)">こちら</a> から。</p>
 
   </div>
 </main>
 
-<!-- FOOTER -->
-<footer style="background:var(--primary);padding:40px 0;text-align:center;">
-  <div class="container">
-    <a href="index.html" style="color:rgba(255,255,255,0.5);font-size:13px;">← トップページに戻る</a>
-    <div style="color:rgba(255,255,255,0.2);font-size:12px;margin-top:16px;">© 2026 三春ミニバスケットボールスポーツ少年団</div>
-  </div>
-</footer>
-
 <script>
-/* ハンバーガー */
-const hamburger = document.querySelector('.hamburger');
-const mobileMenu = document.querySelector('.mobile-menu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-
-/* ヘッダースクロール */
-window.addEventListener('scroll', () => {
-  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-/* フィルター */
 const items = [...document.querySelectorAll('.event-item')];
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
-
     items.forEach(item => {
       if (f === 'all') {
         item.style.display = '';
@@ -655,8 +318,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         item.style.display = item.dataset.tag === f ? '' : 'none';
       }
     });
-
-    // 空になった月を隠す
     document.querySelectorAll('.annual-month').forEach(month => {
       const visible = [...month.querySelectorAll('.event-item')].some(i => i.style.display !== 'none');
       month.style.display = visible ? '' : 'none';
@@ -664,5 +325,3 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 </script>
-</body>
-</html>

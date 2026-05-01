@@ -1,0 +1,149 @@
+.gallery-page-hero {
+  background: linear-gradient(rgba(8,8,20,0.7), rgba(8,8,20,0.85)),
+              url('/images/hero-sport.jpg') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.gallery-page-hero .section-label { margin-bottom: 8px; }
+.gallery-page-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.gallery-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 40px 0 32px;
+}
+.filter-btn {
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: 1.5px solid #ddd;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: inherit;
+  color: #555;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media(max-width:700px){ .photo-grid { grid-template-columns: repeat(2,1fr); gap:8px; } }
+@media(max-width:400px){ .photo-grid { grid-template-columns: 1fr; } }
+
+.photo-card {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #111;
+}
+.photo-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.photo-card:hover img { transform: scale(1.07); }
+.photo-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 50%, rgba(0,0,0,0.7));
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+.photo-card:hover .photo-card-overlay { opacity: 1; }
+.photo-card-label {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 700;
+}
+.photo-card-tag {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 50px;
+  color: #fff;
+}
+.tag-boys  { background: rgba(59,130,246,0.85); }
+.tag-girls { background: rgba(236,72,153,0.75); }
+.tag-all   { background: rgba(232,119,60,0.85); }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 28px;
+  font-size: 36px;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  background: none;
+  border: none;
+}
+.lightbox-caption {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  margin-top: 16px;
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  font-size: 40px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 20px;
+  transition: color 0.2s;
+}
+.lightbox-nav:hover { color: #fff; }
+.lightbox-prev { left: 0; }
+.lightbox-next { right: 0; }
+
+.gallery-upload-note {
+  text-align: center;
+  padding: 40px 0 20px;
+  color: #999;
+  font-size: 14px;
+}

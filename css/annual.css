@@ -1,0 +1,142 @@
+.annual-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('/images/hero-sport.jpg') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.annual-hero .section-label { margin-bottom: 8px; }
+.annual-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.annual-hero p {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.annual-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 40px 0 28px;
+}
+.filter-btn {
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: 1.5px solid #ddd;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: inherit;
+  color: #555;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+.annual-month { margin-bottom: 48px; }
+.month-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+.month-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--orange);
+}
+.month-ja { font-size: 20px; font-weight: 900; color: var(--primary); }
+.month-count { font-size: 12px; color: #aaa; margin-left: auto; }
+
+.event-list { display: flex; flex-direction: column; gap: 8px; }
+.event-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: #fafafa;
+  border-left: 4px solid #ddd;
+  transition: background 0.2s;
+}
+.event-item:hover { background: #f3f3f3; }
+.event-item[data-tag="boys"]  { border-left-color: #3b82f6; }
+.event-item[data-tag="girls"] { border-left-color: #ec4899; }
+.event-item[data-tag="event"] { border-left-color: var(--orange); }
+.event-item[data-tag="all"]   { border-left-color: #22c55e; }
+
+.event-date { font-size: 13px; font-weight: 700; color: #444; white-space: nowrap; }
+.event-date .day { display: block; font-size: 11px; font-weight: 500; color: #999; margin-top: 2px; }
+.event-title { font-size: 14px; font-weight: 700; color: var(--primary); line-height: 1.4; }
+.event-sub { font-size: 12px; color: #888; margin-top: 3px; font-weight: 400; }
+.event-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-boys  { background: #dbeafe; color: #1d4ed8; }
+.badge-girls { background: #fce7f3; color: #be185d; }
+.badge-event { background: #fff0e6; color: #c05d1c; }
+.badge-all   { background: #dcfce7; color: #15803d; }
+
+.annual-note {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  padding: 24px 0 8px;
+}
+
+.annual-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.btn-print {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: #555;
+  transition: all 0.2s;
+}
+.btn-print:hover { border-color: var(--orange); color: var(--orange); }
+
+@media(max-width:640px) {
+  .event-item { grid-template-columns: 60px 1fr; gap: 10px; }
+  .event-badge { display: none; }
+  .month-num { font-size: 38px; }
+}
+@media print {
+  header, footer, .annual-filter, .annual-actions { display: none !important; }
+  .annual-hero { height: auto; padding: 20px; }
+  body { font-size: 12px; }
+}

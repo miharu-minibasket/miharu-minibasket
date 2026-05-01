@@ -1,0 +1,214 @@
+---
+layout: default
+title: "コーチ・スタッフ紹介"
+description: "三春ミニバスケットボールスポーツ少年団のコーチ・スタッフ紹介ページ。"
+---
+
+<style>
+.coaches-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('{{ "/images/hero-sport.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.coaches-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.coaches-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.coaches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  padding: 60px 0;
+}
+.coach-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.coach-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+.coach-photo {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coach-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1a1a2e 60%, #e8773c22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coach-photo-placeholder svg { opacity: 0.18; }
+.coach-body { padding: 24px; }
+.coach-role {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.coach-team-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 50px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.team-boys  { background: #dbeafe; color: #1d4ed8; }
+.team-girls { background: #fce7f3; color: #be185d; }
+.team-both  { background: #dcfce7; color: #15803d; }
+.coach-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.coach-message {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* チームの哲学 */
+.philosophy-section {
+  background: var(--primary);
+  padding: 80px 0;
+}
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.philosophy-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: background 0.25s;
+}
+.philosophy-card:hover { background: rgba(255,255,255,0.08); }
+.philosophy-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+.philosophy-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.philosophy-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+}
+</style>
+
+<!-- ヒーロー -->
+<div class="coaches-hero">
+  <div>
+    <div class="section-label">COACHES &amp; STAFF</div>
+    <h1>コーチ・スタッフ紹介</h1>
+    <p>子どもたちの成長を支える指導陣</p>
+  </div>
+</div>
+
+<!-- コーチ一覧 -->
+<main style="background:#f8f8f8; padding-bottom:80px;">
+  <div class="container">
+    <div class="coaches-grid">
+      {% assign sorted_coaches = site.coaches | sort: 'order' %}
+      {% for coach in sorted_coaches %}
+        {% assign team_label = '男女共通' %}
+        {% assign team_class = 'team-both' %}
+        {% if coach.team == 'boys' %}{% assign team_label = '男子担当' %}{% assign team_class = 'team-boys' %}{% endif %}
+        {% if coach.team == 'girls' %}{% assign team_label = '女子担当' %}{% assign team_class = 'team-girls' %}{% endif %}
+        <div class="coach-card">
+          {% if coach.image and coach.image != '' %}
+            <img class="coach-photo" src="{{ coach.image | relative_url }}" alt="{{ coach.name }}">
+          {% else %}
+            <div class="coach-photo-placeholder">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          {% endif %}
+          <div class="coach-body">
+            <div class="coach-role">
+              {{ coach.role }}
+              <span class="coach-team-badge {{ team_class }}">{{ team_label }}</span>
+            </div>
+            <div class="coach-name">{{ coach.name }}</div>
+            {% if coach.message and coach.message != '' %}
+              <p class="coach-message">{{ coach.message }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+<!-- チームの大切にしていること -->
+<section class="philosophy-section">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">OUR PHILOSOPHY</div>
+    <h2 class="section-title reveal" style="text-align:center;color:#fff;">チームの大切にしていること</h2>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">🏀</span>
+        <div class="philosophy-title">バスケットを楽しむ</div>
+        <p class="philosophy-text">勝負にこだわりながらも、バスケットボールの楽しさを忘れない。子どもたちが「もっとやりたい」と思える環境を大切にします。</p>
+      </div>
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">🤝</span>
+        <div class="philosophy-title">チームワーク</div>
+        <p class="philosophy-text">一人ではできないことも、仲間と力を合わせれば乗り越えられる。勝ちも負けも全員で分かち合います。</p>
+      </div>
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">💪</span>
+        <div class="philosophy-title">挑戦する勇気</div>
+        <p class="philosophy-text">失敗を恐れず挑戦すること。試合でも練習でも、積極的にプレーする姿勢を指導者全員が応援します。</p>
+      </div>
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">📚</span>
+        <div class="philosophy-title">文武両道</div>
+        <p class="philosophy-text">スポーツと学業は両立できる。練習への取り組み方、礼儀、感謝の気持ちは学校生活にも活きます。</p>
+      </div>
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">🌱</span>
+        <div class="philosophy-title">長期的な成長</div>
+        <p class="philosophy-text">小学生の今だけでなく、中学・高校・社会人になっても活躍できる「人間力」を育てることを目標にしています。</p>
+      </div>
+      <div class="philosophy-card reveal">
+        <span class="philosophy-icon">👨‍👩‍👧‍👦</span>
+        <div class="philosophy-title">家族・地域とともに</div>
+        <p class="philosophy-text">保護者・地域の方々と一緒に子どもたちを育てる。三春の地から全国へ挑戦できる選手を輩出します。</p>
+      </div>
+    </div>
+  </div>
+</section>

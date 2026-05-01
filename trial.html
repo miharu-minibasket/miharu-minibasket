@@ -1,0 +1,339 @@
+---
+layout: default
+title: "体験練習申込"
+description: "三春ミニバスケットボールスポーツ少年団の体験練習会申込フォーム。無料・随時受付中。小学1年生〜6年生対象。"
+---
+
+<style>
+.trial-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('{{ "/images/hero-kids.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.trial-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.trial-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.trial-section { padding: 72px 0; background: #f8f8f8; }
+.trial-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media(max-width:768px){ .trial-layout { grid-template-columns: 1fr; } }
+
+/* 案内ボックス */
+.trial-info-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.trial-info-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.trial-info-item:last-child { border-bottom: none; }
+.trial-info-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+  margin-top: 2px;
+}
+.trial-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+.trial-info-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.5;
+}
+.trial-info-note {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* フォーム */
+.trial-form-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.form-label .required {
+  color: #e53e3e;
+  font-size: 10px;
+  background: #fff5f5;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.form-label .optional {
+  color: #aaa;
+  font-size: 10px;
+  margin-left: 6px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--primary);
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,119,60,0.12);
+  background: #fff;
+}
+.form-textarea { min-height: 100px; resize: vertical; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media(max-width:480px){ .form-row { grid-template-columns: 1fr; } }
+
+.form-hint {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 5px;
+}
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+  font-family: inherit;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: #d4672f; }
+.form-submit:active { transform: scale(0.99); }
+
+.form-privacy {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+/* 送信完了メッセージ */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+.form-success-icon { font-size: 48px; margin-bottom: 16px; }
+.form-success-title { font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 12px; }
+.form-success-text { font-size: 14px; color: #666; line-height: 1.8; }
+</style>
+
+<!-- ヒーロー -->
+<div class="trial-hero">
+  <div>
+    <div class="section-label">TRIAL PRACTICE</div>
+    <h1>体験練習会のご案内</h1>
+    <p>無料・随時受付中 / 小学1年生〜6年生対象</p>
+  </div>
+</div>
+
+<!-- メイン -->
+<section class="trial-section">
+  <div class="container">
+    <div class="trial-layout">
+
+      <!-- 案内情報 -->
+      <div>
+        <div class="section-label">ABOUT TRIAL</div>
+        <h2 class="section-title" style="margin-bottom:32px;">体験について</h2>
+
+        <div class="trial-info-box">
+          <div class="trial-info-item">
+            <div class="trial-info-icon">💰</div>
+            <div>
+              <div class="trial-info-label">参加費</div>
+              <div class="trial-info-value">無料</div>
+              <div class="trial-info-note">体験期間中は何度でも参加できます</div>
+            </div>
+          </div>
+          <div class="trial-info-item">
+            <div class="trial-info-icon">👦</div>
+            <div>
+              <div class="trial-info-label">対象</div>
+              <div class="trial-info-value">小学1年生〜6年生</div>
+              <div class="trial-info-note">男女問いません。未経験者大歓迎！</div>
+            </div>
+          </div>
+          <div class="trial-info-item">
+            <div class="trial-info-icon">📅</div>
+            <div>
+              <div class="trial-info-label">開催日</div>
+              <div class="trial-info-value">毎週 土・日曜日</div>
+              <div class="trial-info-note">詳細な日時はお申込み後にご連絡します</div>
+            </div>
+          </div>
+          <div class="trial-info-item">
+            <div class="trial-info-icon">📍</div>
+            <div>
+              <div class="trial-info-label">練習会場</div>
+              <div class="trial-info-value">三春町町民第二体育館</div>
+              <div class="trial-info-note">福島県田村郡三春町</div>
+            </div>
+          </div>
+          <div class="trial-info-item">
+            <div class="trial-info-icon">👕</div>
+            <div>
+              <div class="trial-info-label">持ち物</div>
+              <div class="trial-info-value">動きやすい服装・運動靴・水筒</div>
+              <div class="trial-info-note">バスケットシューズがなくても大丈夫です</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--orange);border-radius:12px;padding:24px;margin-top:24px;color:#fff;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;opacity:0.8;">COACH MESSAGE</div>
+          <p style="font-size:14px;line-height:1.8;">「うちの子、バスケ向いてるかな？」と思ったら、まず体験してみてください。<br>上手い下手は関係なし。やる気と笑顔があれば大歓迎です！</p>
+        </div>
+      </div>
+
+      <!-- 申込フォーム -->
+      <div>
+        <div class="section-label">APPLY NOW</div>
+        <h2 class="section-title" style="margin-bottom:32px;">体験申込フォーム</h2>
+
+        <div class="trial-form-box">
+          <!-- Netlify Forms: data-netlify="true" で自動受信 -->
+          <form name="trial-application" method="POST" data-netlify="true" id="trialForm">
+            <input type="hidden" name="form-name" value="trial-application">
+
+            <div class="form-group">
+              <label class="form-label">
+                お子様のお名前（ふりがな）<span class="required">必須</span>
+              </label>
+              <div class="form-row">
+                <input type="text" name="child_name" class="form-input" placeholder="例：三春 太郎" required>
+                <input type="text" name="child_name_kana" class="form-input" placeholder="例：みはる たろう" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                学年<span class="required">必須</span>
+              </label>
+              <select name="grade" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="1年生">小学1年生</option>
+                <option value="2年生">小学2年生</option>
+                <option value="3年生">小学3年生</option>
+                <option value="4年生">小学4年生</option>
+                <option value="5年生">小学5年生</option>
+                <option value="6年生">小学6年生</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                バスケ経験<span class="required">必須</span>
+              </label>
+              <select name="experience" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="未経験">未経験（初めて）</option>
+                <option value="少しあり">少しあり（スクール等）</option>
+                <option value="チーム経験あり">チーム経験あり</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                保護者のお名前<span class="required">必須</span>
+              </label>
+              <input type="text" name="parent_name" class="form-input" placeholder="例：三春 一郎" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                メールアドレス<span class="required">必須</span>
+              </label>
+              <input type="email" name="email" class="form-input" placeholder="例：miharu@example.com" required>
+              <div class="form-hint">確認メールをお送りします</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                電話番号<span class="optional">任意</span>
+              </label>
+              <input type="tel" name="phone" class="form-input" placeholder="例：090-1234-5678">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                希望日程・ご質問など<span class="optional">任意</span>
+              </label>
+              <textarea name="message" class="form-textarea" placeholder="「土曜日の午前中を希望」「駐車場はありますか？」など、お気軽にどうぞ。"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">申込を送信する →</button>
+
+            <p class="form-privacy">
+              ご記入いただいた情報はチームからの連絡・体験日程の調整のみに使用します。<br>
+              第三者への提供・営業目的への使用は一切行いません。
+            </p>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <div class="form-success-icon">✅</div>
+            <div class="form-success-title">申込を受け付けました！</div>
+            <p class="form-success-text">
+              ご申込ありがとうございます。<br>
+              2〜3日以内に担当コーチよりご連絡いたします。<br><br>
+              メールが届かない場合は迷惑メールフォルダをご確認のうえ、<br>
+              お問い合わせページからご連絡ください。
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
