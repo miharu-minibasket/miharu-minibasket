@@ -1,0 +1,306 @@
+---
+layout: default
+title: "寄付・サポート"
+description: "三春ミニバスケットボールスポーツ少年団への寄付・個人サポートのご案内。子どもたちのスポーツ活動を支援してください。"
+---
+
+<style>
+.donate-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('{{ "/images/hero-kids.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.donate-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.donate-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.donate-section { padding: 72px 0; background: #f8f8f8; }
+.donate-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media(max-width:768px){ .donate-layout { grid-template-columns: 1fr; } }
+
+/* 使途説明 */
+.usage-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.usage-item {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.usage-item:last-child { border-bottom: none; }
+.usage-icon { font-size: 24px; flex-shrink: 0; width: 36px; text-align: center; }
+.usage-label { font-size: 13px; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
+.usage-text { font-size: 13px; color: #666; line-height: 1.7; }
+
+/* 支援方法 */
+.method-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.method-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+.method-step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.method-num {
+  width: 28px;
+  height: 28px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.method-step-title { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.method-step-text { font-size: 13px; color: #666; line-height: 1.7; }
+
+.bank-info {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.bank-info dt {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 3px;
+  margin-top: 12px;
+}
+.bank-info dt:first-child { margin-top: 0; }
+.bank-info dd {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.donate-note {
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.8;
+  margin-top: 20px;
+  padding: 16px;
+  background: #f8f8f8;
+  border-radius: 8px;
+}
+
+.btn-contact {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 36px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.2s;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.btn-contact:hover { background: #d4672f; }
+
+/* 支援実績 */
+.impact-section { padding: 72px 0; background: var(--primary); }
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.impact-card {
+  text-align: center;
+  padding: 32px 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.impact-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.impact-label { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 700; }
+</style>
+
+<!-- ヒーロー -->
+<div class="donate-hero">
+  <div>
+    <div class="section-label">SUPPORT & DONATE</div>
+    <h1>寄付・サポートのお願い</h1>
+    <p>子どもたちの夢を、一緒に育てていただけませんか</p>
+  </div>
+</div>
+
+<!-- メイン -->
+<section class="donate-section">
+  <div class="container">
+    <div class="donate-layout">
+
+      <!-- 使途説明 -->
+      <div>
+        <div class="section-label">HOW WE USE</div>
+        <h2 class="section-title" style="margin-bottom:32px;">いただいた支援の使い道</h2>
+
+        <div class="usage-box">
+          <div class="usage-item">
+            <div class="usage-icon">🏀</div>
+            <div>
+              <div class="usage-label">備品・用具の購入</div>
+              <div class="usage-text">ボール・コーン・マーカーなど練習用具の整備。子どもたちが安全に練習できる環境づくりに使います。</div>
+            </div>
+          </div>
+          <div class="usage-item">
+            <div class="usage-icon">👕</div>
+            <div>
+              <div class="usage-label">ユニフォーム・遠征費の補助</div>
+              <div class="usage-text">遠征大会の交通費・宿泊費の一部補助。経済的な事情にかかわらず全員が大会に参加できるよう支援します。</div>
+            </div>
+          </div>
+          <div class="usage-item">
+            <div class="usage-icon">🏟️</div>
+            <div>
+              <div class="usage-label">体育館使用料・運営費</div>
+              <div class="usage-text">練習会場の使用料・イベント運営費。継続的な活動のための基盤整備に使います。</div>
+            </div>
+          </div>
+          <div class="usage-item">
+            <div class="usage-icon">📚</div>
+            <div>
+              <div class="usage-label">指導者研修・資格取得</div>
+              <div class="usage-text">コーチの技術向上のための研修費用。より良い指導ができる環境づくりに使います。</div>
+            </div>
+          </div>
+          <div class="usage-item">
+            <div class="usage-icon">📸</div>
+            <div>
+              <div class="usage-label">広報・記録活動</div>
+              <div class="usage-text">子どもたちの活躍を記録・発信するための費用。思い出として残す写真・動画撮影などに使います。</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:12px;padding:24px;margin-top:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <p style="font-size:13px;color:#555;line-height:1.9;">
+            ご支援いただいた方には、年1回<strong>活動報告書</strong>をお送りします。<br>
+            子どもたちの成長・大会結果・使途の詳細をご報告いたします。
+          </p>
+        </div>
+      </div>
+
+      <!-- 支援方法 -->
+      <div>
+        <div class="section-label">HOW TO SUPPORT</div>
+        <h2 class="section-title" style="margin-bottom:32px;">支援の方法</h2>
+
+        <div class="method-box">
+          <div class="method-title">銀行振込でのご支援</div>
+
+          <div class="method-step">
+            <div class="method-num">1</div>
+            <div>
+              <div class="method-step-title">下記口座へお振込み</div>
+              <div class="method-step-text">お名前・ご住所を振込名義にご記入ください</div>
+            </div>
+          </div>
+
+          <dl class="bank-info">
+            <dt>金融機関</dt>
+            <dd>○○銀行 △△支店</dd>
+            <dt>口座種別</dt>
+            <dd>普通預金</dd>
+            <dt>口座番号</dt>
+            <dd>1234567</dd>
+            <dt>口座名義</dt>
+            <dd>ミハルミニバスケットボールスポーツショウネンダン</dd>
+          </dl>
+
+          <div class="method-step">
+            <div class="method-num">2</div>
+            <div>
+              <div class="method-step-title">振込後にご連絡をお願いします</div>
+              <div class="method-step-text">下記フォームよりお名前・振込金額・日付をお知らせください。活動報告書の送付先をお伺いします。</div>
+            </div>
+          </div>
+
+          <a href="{{ '/#contact' | relative_url }}" class="btn-contact">振込後のご連絡はこちら</a>
+
+          <p class="donate-note">
+            ※ 振込手数料はご負担をお願いします。<br>
+            ※ 領収書が必要な場合はお申し付けください。<br>
+            ※ 少額からでも大変ありがたく受け取らせていただきます。<br>
+            ※ 口座情報の詳細は、お問い合わせにてご確認ください。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 活動実績 -->
+<section class="impact-section">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">OUR IMPACT</div>
+    <h2 class="section-title" style="text-align:center;color:#fff;">チームの実績</h2>
+
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-num">30+</div>
+        <div class="impact-label">在籍選手数</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">15+</div>
+        <div class="impact-label">年間大会出場数</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">10+</div>
+        <div class="impact-label">活動年数</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-num">100+</div>
+        <div class="impact-label">OB・OG選手数</div>
+      </div>
+    </div>
+  </div>
+</section>

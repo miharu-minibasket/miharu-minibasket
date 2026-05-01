@@ -1,0 +1,386 @@
+---
+layout: default
+title: "活動カレンダー"
+description: "三春ミニバスケットボールスポーツ少年団の月別活動カレンダー。練習・大会・イベントの日程をご確認ください。"
+---
+
+<style>
+.calendar-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('{{ "/images/hero-sport.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.calendar-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.calendar-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.calendar-section { padding: 60px 0 80px; background: #f8f8f8; }
+
+/* 月ナビ */
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.month-nav-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.month-nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+.month-nav-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--primary);
+  min-width: 200px;
+  text-align: center;
+}
+
+/* カレンダーグリッド */
+.cal-wrap {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.cal-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.cal-header-cell {
+  padding: 14px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--primary);
+  color: rgba(255,255,255,0.7);
+}
+.cal-header-cell:first-child { color: #f87171; }
+.cal-header-cell:last-child  { color: #60a5fa; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: #f0f0f0;
+}
+.cal-cell {
+  background: #fff;
+  min-height: 90px;
+  padding: 10px 8px;
+  position: relative;
+}
+.cal-cell.other-month { background: #fafafa; }
+.cal-cell.today { background: #fff8f3; }
+.cal-day {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.cal-cell.today .cal-day {
+  background: var(--orange);
+  color: #fff;
+}
+.cal-cell.other-month .cal-day { color: #ccc; }
+.cal-day.sunday { color: #f87171; }
+.cal-day.saturday { color: #60a5fa; }
+
+.cal-event {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+.cal-event.tag-boys  { background: #dbeafe; color: #1d4ed8; }
+.cal-event.tag-girls { background: #fce7f3; color: #be185d; }
+.cal-event.tag-event { background: #fff0e6; color: #c05d1c; }
+.cal-event.tag-all   { background: #dcfce7; color: #15803d; }
+
+/* 凡例 */
+.cal-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+}
+
+/* イベント一覧（月別） */
+.event-list-section { margin-top: 16px; }
+.event-list-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.cal-event-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+.cal-event-row:last-child { border-bottom: none; }
+.cal-event-date { font-weight: 700; color: #444; min-width: 70px; }
+.cal-event-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 50px;
+  flex-shrink: 0;
+}
+.cal-event-title { color: var(--primary); font-weight: 700; }
+.no-events { color: #ccc; font-size: 13px; padding: 16px 0; text-align: center; }
+
+@media(max-width:640px){
+  .cal-cell { min-height: 60px; padding: 6px 4px; }
+  .cal-event { display: none; }
+  .cal-day { font-size: 12px; }
+}
+</style>
+
+<!-- ヒーロー -->
+<div class="calendar-hero">
+  <div>
+    <div class="section-label">ACTIVITY CALENDAR</div>
+    <h1>活動カレンダー</h1>
+    <p>月別の練習・大会・イベントスケジュール</p>
+  </div>
+</div>
+
+<section class="calendar-section">
+  <div class="container">
+
+    <!-- 凡例 -->
+    <div class="cal-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#dbeafe;"></div>男子</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;"></div>女子</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fff0e6;"></div>大会</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#dcfce7;"></div>全体</div>
+    </div>
+
+    <!-- 月ナビ -->
+    <div class="month-nav">
+      <button class="month-nav-btn" id="prevMonth">&#8249;</button>
+      <div class="month-nav-title" id="monthTitle">2026年 5月</div>
+      <button class="month-nav-btn" id="nextMonth">&#8250;</button>
+    </div>
+
+    <!-- カレンダー本体 -->
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div class="cal-header-cell">日</div>
+        <div class="cal-header-cell">月</div>
+        <div class="cal-header-cell">火</div>
+        <div class="cal-header-cell">水</div>
+        <div class="cal-header-cell">木</div>
+        <div class="cal-header-cell">金</div>
+        <div class="cal-header-cell">土</div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <!-- イベント一覧 -->
+    <div class="event-list-section">
+      <div class="event-list-title" id="eventListTitle">この月のイベント</div>
+      <div id="eventList"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// 年間スケジュールデータ（annual.htmlと同じデータをJSで持つ）
+const scheduleData = [
+  // 4月
+  { month:4, day:5,  dayEnd:6,  tag:'event', title:'福島県春季ミニバスケットボール選手権大会', sub:'会場：福島市' },
+  { month:4, day:12, tag:'all',  title:'2026年度 保護者会・チーム総会', sub:'三春町町民第二体育館' },
+  { month:4, day:19, tag:'all',  title:'新入団員 体験練習会', sub:'未経験・体験希望者歓迎' },
+  // 5月
+  { month:5, day:3,  dayEnd:4,  tag:'event', title:'田村地区ミニバスケットボール交流大会', sub:'会場：田村市総合体育館' },
+  { month:5, day:17, dayEnd:18, tag:'boys',  title:'【男子】郡山地区招待大会', sub:'会場：郡山市' },
+  // 6月
+  { month:6, day:7,  dayEnd:8,  tag:'event', title:'福島県ミニバスケットボール選手権大会（予選）', sub:'会場：未定' },
+  { month:6, day:21, dayEnd:22, tag:'girls', title:'【女子】田村地区招待大会', sub:'会場：三春町町民第二体育館' },
+  // 7月
+  { month:7, day:19, dayEnd:20, tag:'all',  title:'夏合宿（1泊2日）', sub:'場所：調整中' },
+  { month:7, day:26, dayEnd:27, tag:'event', title:'福島県ミニバスケットボール選手権大会（本戦）', sub:'会場：福島市' },
+  // 9月
+  { month:9, day:7,  tag:'all',  title:'練習再開・シーズン後半スタート', sub:'三春町町民第二体育館' },
+  { month:9, day:20, dayEnd:21, tag:'event', title:'秋季地区交流大会', sub:'会場：未定' },
+  // 10月
+  { month:10, day:4,  dayEnd:5,  tag:'boys',  title:'【男子】秋季招待大会', sub:'会場：調整中' },
+  { month:10, day:18, dayEnd:19, tag:'girls', title:'【女子】秋季招待大会', sub:'会場：調整中' },
+  // 11月
+  { month:11, day:1,  dayEnd:3,  tag:'event', title:'東北ブロックミニバスケットボール大会（予選）', sub:'会場：仙台市（予定）' },
+  { month:11, day:23, tag:'all',  title:'チームOB・保護者交流試合', sub:'三春町町民第二体育館' },
+  // 12月
+  { month:12, day:6,  dayEnd:7,  tag:'event', title:'福島県ミニバスケットボール新人大会', sub:'会場：未定' },
+  { month:12, day:23, tag:'all',  title:'年末お楽しみ会・練習納め', sub:'三春町町民第二体育館' },
+  // 1月
+  { month:1, day:10, tag:'all',  title:'練習始め・新年初練習', sub:'三春町町民第二体育館' },
+  { month:1, day:17, dayEnd:18, tag:'event', title:'田村地区新人大会', sub:'会場：調整中' },
+  // 2月
+  { month:2, day:7,  dayEnd:8,  tag:'boys',  title:'【男子】卒業記念大会', sub:'会場：調整中' },
+  { month:2, day:21, dayEnd:22, tag:'girls', title:'【女子】卒業記念大会', sub:'会場：調整中' },
+  // 3月
+  { month:3, day:8,  tag:'all',  title:'卒団式・6年生送る会', sub:'三春町町民第二体育館' },
+  { month:3, day:21, dayEnd:22, tag:'all',  title:'年度末ファミリー交流試合', sub:'三春町町民第二体育館' },
+];
+
+const TAG_LABEL = { boys:'男子', girls:'女子', event:'大会', all:'全体' };
+const TAG_CLASS = { boys:'tag-boys', girls:'tag-girls', event:'tag-event', all:'tag-all' };
+
+// 年度で月を管理（4月〜翌3月）
+let curYear = 2026;
+let curMonth = 5; // 1-indexed
+
+function yearForMonth(m) {
+  return m >= 4 ? 2026 : 2027;
+}
+
+function renderCalendar() {
+  const year = yearForMonth(curMonth);
+  const monthNames = ['','1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('monthTitle').textContent = `${year}年 ${monthNames[curMonth]}`;
+
+  const firstDay = new Date(year, curMonth - 1, 1).getDay();
+  const daysInMonth = new Date(year, curMonth, 0).getDate();
+  const prevDays = new Date(year, curMonth - 1, 0).getDate();
+  const today = new Date();
+
+  // この月のイベント
+  const monthEvents = scheduleData.filter(e => e.month === curMonth);
+
+  // カレンダーグリッド生成
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  // イベントをday→リストでマップ
+  const eventMap = {};
+  monthEvents.forEach(ev => {
+    for (let d = ev.day; d <= (ev.dayEnd || ev.day); d++) {
+      if (!eventMap[d]) eventMap[d] = [];
+      if (d === ev.day) eventMap[d].push(ev);
+    }
+  });
+
+  let totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+  for (let i = 0; i < totalCells; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell';
+
+    let dayNum, isOther = false;
+    if (i < firstDay) {
+      dayNum = prevDays - firstDay + i + 1;
+      isOther = true;
+      cell.classList.add('other-month');
+    } else if (i >= firstDay + daysInMonth) {
+      dayNum = i - firstDay - daysInMonth + 1;
+      isOther = true;
+      cell.classList.add('other-month');
+    } else {
+      dayNum = i - firstDay + 1;
+      if (today.getFullYear() === year && today.getMonth() + 1 === curMonth && today.getDate() === dayNum) {
+        cell.classList.add('today');
+      }
+    }
+
+    const dow = i % 7;
+    const dayEl = document.createElement('div');
+    dayEl.className = 'cal-day' + (dow === 0 ? ' sunday' : dow === 6 ? ' saturday' : '');
+    dayEl.textContent = dayNum;
+    cell.appendChild(dayEl);
+
+    if (!isOther && eventMap[dayNum]) {
+      eventMap[dayNum].forEach(ev => {
+        const evEl = document.createElement('div');
+        evEl.className = `cal-event ${TAG_CLASS[ev.tag]}`;
+        evEl.textContent = ev.title;
+        evEl.title = ev.title;
+        cell.appendChild(evEl);
+      });
+    }
+
+    grid.appendChild(cell);
+  }
+
+  // イベント一覧
+  const listEl = document.getElementById('eventList');
+  document.getElementById('eventListTitle').textContent = `${monthNames[curMonth]}のイベント`;
+  if (monthEvents.length === 0) {
+    listEl.innerHTML = '<div class="no-events">この月の登録イベントはありません</div>';
+  } else {
+    listEl.innerHTML = monthEvents.map(ev => {
+      const dateStr = ev.dayEnd ? `${curMonth}/${ev.day}〜${ev.dayEnd}` : `${curMonth}/${ev.day}`;
+      return `<div class="cal-event-row">
+        <span class="cal-event-date">${dateStr}</span>
+        <span class="cal-event-tag ${TAG_CLASS[ev.tag]}">${TAG_LABEL[ev.tag]}</span>
+        <span class="cal-event-title">${ev.title}</span>
+      </div>`;
+    }).join('');
+  }
+}
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+  curMonth--;
+  if (curMonth < 1) curMonth = 12;
+  if (curMonth < 4 && curMonth > 3) curMonth = 3; // 年度内のみ 4〜翌3月
+  // 年度外に出ないようにクランプ
+  renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', () => {
+  curMonth++;
+  if (curMonth > 12) curMonth = 1;
+  renderCalendar();
+});
+
+renderCalendar();
+</script>

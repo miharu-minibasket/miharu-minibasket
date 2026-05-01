@@ -1,0 +1,338 @@
+---
+layout: default
+title: "入団案内"
+description: "三春ミニバスケットボールスポーツ少年団の入団案内。随時募集中。月会費・活動内容・よくある質問をご確認ください。"
+---
+
+<style>
+.join-hero {
+  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+              url('{{ "/images/hero-action.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.join-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.join-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.join-section { padding: 72px 0; background: #f8f8f8; }
+.join-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+@media(max-width:768px){ .join-layout { grid-template-columns: 1fr; } }
+
+.info-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  margin-bottom: 24px;
+}
+.info-box h3 {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-table { width: 100%; border-collapse: collapse; }
+.info-table tr { border-bottom: 1px solid #f5f5f5; }
+.info-table tr:last-child { border-bottom: none; }
+.info-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  padding: 12px 0;
+  width: 110px;
+  vertical-align: top;
+}
+.info-table td {
+  font-size: 13px;
+  color: #444;
+  padding: 12px 0;
+  line-height: 1.7;
+}
+
+/* ステップ */
+.steps { counter-reset: step; }
+.step-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 28px;
+  align-items: flex-start;
+}
+.step-item:last-child { margin-bottom: 0; }
+.step-num {
+  width: 36px; height: 36px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.step-title { font-size: 15px; font-weight: 900; color: var(--primary); margin-bottom: 6px; }
+.step-text { font-size: 13px; color: #666; line-height: 1.7; }
+
+/* FAQ */
+.faq-section { padding: 72px 0; background: #fff; }
+.faq-list { max-width: 800px; margin: 48px auto 0; }
+.faq-item {
+  border-radius: 12px;
+  border: 1.5px solid #f0f0f0;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.faq-q {
+  padding: 18px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s;
+}
+.faq-q:hover { background: #fafafa; }
+.faq-q::before {
+  content: "Q";
+  width: 24px; height: 24px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.faq-q::after {
+  content: "▾";
+  margin-left: auto;
+  color: #aaa;
+  font-size: 14px;
+  transition: transform 0.25s;
+}
+.faq-item.open .faq-q::after { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 24px 18px 60px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* CTA */
+.cta-section {
+  background: var(--primary);
+  padding: 80px 0;
+  text-align: center;
+}
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+.btn-cta-primary {
+  display: inline-block;
+  padding: 16px 40px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-cta-primary:hover { background: #d4672f; }
+.btn-cta-outline {
+  display: inline-block;
+  padding: 15px 40px;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.btn-cta-outline:hover { border-color: #fff; }
+</style>
+
+<!-- ヒーロー -->
+<div class="join-hero">
+  <div>
+    <div class="section-label">JOIN US</div>
+    <h1>入団案内</h1>
+    <p>随時入団受付中 / 体験練習無料</p>
+  </div>
+</div>
+
+<!-- 基本情報 -->
+<section class="join-section">
+  <div class="container">
+    <div class="join-layout">
+
+      <!-- 左：基本情報 -->
+      <div>
+        <div class="info-box">
+          <h3>🏀 基本情報</h3>
+          <table class="info-table">
+            <tr><th>対象</th><td>小学1年生〜6年生（男女問わず）</td></tr>
+            <tr><th>募集状況</th><td>随時受付中<br><span style="color:var(--orange);font-weight:700;">体験練習は無料・何回でも参加OK</span></td></tr>
+            <tr><th>練習日</th><td>毎週土・日曜日<br>（大会・行事により変動あり）</td></tr>
+            <tr><th>練習時間</th><td>9:00〜12:00（予定）</td></tr>
+            <tr><th>練習会場</th><td>三春町町民第二体育館<br>（福島県田村郡三春町）</td></tr>
+            <tr><th>月会費</th><td>月額 3,000円<br><span style="font-size:12px;color:#aaa;">※ 入団時に別途入団費あり</span></td></tr>
+            <tr><th>その他費用</th><td>ユニフォーム代（入団時）<br>遠征費（大会出場時）</td></tr>
+          </table>
+        </div>
+
+        <div class="info-box">
+          <h3>📋 入団の流れ</h3>
+          <div class="steps">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div>
+                <div class="step-title">体験練習に参加</div>
+                <div class="step-text">まずは体験してみてください。無料・何回でもOK。このサイトの「体験申込」フォームからお申込みいただくか、お問い合わせください。</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div>
+                <div class="step-title">コーチと面談</div>
+                <div class="step-text">体験練習後、保護者の方とコーチで簡単な面談を行います。活動内容・費用・注意事項などご説明します。</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div>
+                <div class="step-title">入団申込書の提出</div>
+                <div class="step-text">入団を希望される場合、申込書と入団費をお持ちください。スポーツ保険への加入手続きも行います。</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div>
+                <div class="step-title">ユニフォーム注文・正式入団</div>
+                <div class="step-text">ユニフォームを注文して正式入団。次の練習から一緒に活動スタートです！</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：活動内容 -->
+      <div>
+        <div class="info-box">
+          <h3>⭐ 活動内容</h3>
+          <table class="info-table">
+            <tr><th>通常練習</th><td>基礎技術（ドリブル・パス・シュート）、戦術練習、体力づくり</td></tr>
+            <tr><th>大会参加</th><td>田村地区・福島県・東北ブロックの各大会に出場</td></tr>
+            <tr><th>合宿</th><td>年1回 夏合宿（1泊2日）</td></tr>
+            <tr><th>交流試合</th><td>近隣チームとの合同練習・交流試合</td></tr>
+            <tr><th>イベント</th><td>保護者会、卒団式、OB交流戦など</td></tr>
+          </table>
+        </div>
+
+        <div class="info-box">
+          <h3>🎽 必要なもの</h3>
+          <table class="info-table">
+            <tr><th>体験時</th><td>動きやすい服装・室内運動靴・水筒<br><span style="font-size:12px;color:#aaa;">バスケットシューズは不要です</span></td></tr>
+            <tr><th>入団後</th><td>チームユニフォーム（上下）<br>バスケットシューズ<br>練習着（指定なし）</td></tr>
+          </table>
+        </div>
+
+        <div style="background:var(--orange);border-radius:12px;padding:24px;color:#fff;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;opacity:0.8;">🌟 こんな子を待っています</div>
+          <ul style="font-size:13px;line-height:2;padding-left:16px;margin:0;">
+            <li>バスケットボールに興味がある</li>
+            <li>体を動かすことが好き</li>
+            <li>仲間と一緒に何かに挑戦したい</li>
+            <li>未経験でも大丈夫！</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">FAQ</div>
+    <h2 class="section-title reveal" style="text-align:center;">よくある質問</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">未経験でも入団できますか？</div>
+        <div class="faq-a">もちろんです！現在在籍している選手の多くが未経験からスタートしています。基礎から丁寧に指導しますので、安心してご参加ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">女子も入団できますか？</div>
+        <div class="faq-a">はい。男女それぞれにチームがあります。女子チームは女性コーチが担当しており、のびのびと練習できる環境です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">何年生から入団できますか？</div>
+        <div class="faq-a">小学1年生から入団可能です。1〜2年生は基礎体力づくりや楽しく運動することを中心に活動します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">練習を休んでも大丈夫ですか？</div>
+        <div class="faq-a">家族の行事や体調不良による欠席は問題ありません。ただし、大会前は練習参加をお願いする場合があります。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">保護者の当番（お手伝い）はありますか？</div>
+        <div class="faq-a">大会時の審判補助・運営のお手伝いをお願いすることがあります。当番制ではなく、可能な範囲でのご協力をお願いしています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">習い事と掛け持ちできますか？</div>
+        <div class="faq-a">他の習い事との掛け持ちは可能です。まずはご相談ください。練習日程を考慮して対応します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">見学だけでもできますか？</div>
+        <div class="faq-a">もちろんです。まずは練習を見学していただくだけでも大歓迎です。事前にお問い合わせいただければ、見学日時をご案内します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">TAKE THE FIRST STEP</div>
+    <h2 class="section-title" style="text-align:center;color:#fff;">まずは体験してみよう！</h2>
+    <p style="color:rgba(255,255,255,0.6);text-align:center;margin-top:16px;font-size:14px;">無料体験は随時受付中。お気軽にどうぞ。</p>
+    <div class="cta-btns">
+      <a href="{{ '/trial.html' | relative_url }}" class="btn-cta-primary">体験練習を申し込む</a>
+      <a href="{{ '/#contact' | relative_url }}" class="btn-cta-outline">まずは質問する</a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+</script>
