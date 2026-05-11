@@ -5,5 +5,5 @@ name_en: jirou
 role: コーチ
 team: girls
 message: 男子チームの練習を担当しています。基礎をしっかり身につけ、試合で活かせる力を育てます。
-image: ""
+image: /images/line_album_たかしカップミクロ大会資料_250927_1.jpg
 ---
