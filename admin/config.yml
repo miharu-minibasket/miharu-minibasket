@@ -105,3 +105,17 @@ collections:
           - { label: "大会", value: "event" }
       - { label: "場所・補足", name: "sub", widget: "string", required: false }
       - { label: "月（数字）", name: "month", widget: "number", hint: "4〜12, 1〜3" }
+
+  - name: "teams"
+    label: "チーム紹介設定"
+    files:
+      - name: "teams"
+        label: "チーム画像・説明"
+        file: "_data/teams.yml"
+        fields:
+          - { label: "男子チーム 写真", name: "boys_image", widget: "image", hint: "トップページのチーム紹介に表示される写真" }
+          - { label: "男子チーム 説明文", name: "boys_desc", widget: "string" }
+          - { label: "男子チーム Instagram URL", name: "boys_instagram", widget: "string" }
+          - { label: "女子チーム 写真", name: "girls_image", widget: "image", hint: "トップページのチーム紹介に表示される写真" }
+          - { label: "女子チーム 説明文", name: "girls_desc", widget: "string" }
+          - { label: "女子チーム Instagram URL", name: "girls_instagram", widget: "string" }
