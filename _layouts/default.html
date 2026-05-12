@@ -29,12 +29,19 @@
     <nav class="nav">
       <a href="{{ '/#news' | relative_url }}">お知らせ</a>
       <a href="{{ '/#teams' | relative_url }}">チーム</a>
-      <a href="{{ '/#schedule' | relative_url }}">スケジュール</a>
       <a href="{{ '/gallery.html' | relative_url }}" {% if page.url contains 'gallery' %}style="color:var(--orange)"{% endif %}>ギャラリー</a>
       <a href="{{ '/annual.html' | relative_url }}" {% if page.url contains 'annual' %}style="color:var(--orange)"{% endif %}>年間予定</a>
       <a href="{{ '/coaches.html' | relative_url }}" {% if page.url contains 'coaches' %}style="color:var(--orange)"{% endif %}>コーチ紹介</a>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger" {% if page.url contains 'sponsors' or page.url contains 'donate' or page.url contains 'join' %}style="color:var(--orange)"{% endif %}>サポート ▾</span>
+        <div class="nav-dropdown-menu">
+          <a href="{{ '/sponsors.html' | relative_url }}">協賛・スポンサー</a>
+          <a href="{{ '/donate.html' | relative_url }}">寄付・サポート</a>
+          <a href="{{ '/join.html' | relative_url }}">入団案内</a>
+        </div>
+      </div>
       <a href="{{ '/#contact' | relative_url }}">お問い合わせ</a>
-      <a href="{{ '/trial.html' | relative_url }}" class="btn-join">体験申込</a>
+      <a href="{{ '/#join' | relative_url }}" class="btn-join">体験申込</a>
     </nav>
     <div class="hamburger" role="button" aria-label="メニューを開く">
       <span></span><span></span><span></span>
@@ -45,12 +52,14 @@
 <nav class="mobile-menu">
   <a href="{{ '/#news' | relative_url }}">お知らせ</a>
   <a href="{{ '/#teams' | relative_url }}">チーム紹介</a>
-  <a href="{{ '/#schedule' | relative_url }}">スケジュール</a>
   <a href="{{ '/gallery.html' | relative_url }}">ギャラリー</a>
   <a href="{{ '/annual.html' | relative_url }}">年間予定</a>
   <a href="{{ '/coaches.html' | relative_url }}">コーチ紹介</a>
+  <a href="{{ '/sponsors.html' | relative_url }}">協賛・スポンサー</a>
+  <a href="{{ '/donate.html' | relative_url }}">寄付・サポート</a>
+  <a href="{{ '/join.html' | relative_url }}">入団案内</a>
   <a href="{{ '/#contact' | relative_url }}">お問い合わせ</a>
-  <a href="{{ '/trial.html' | relative_url }}" class="btn-join-m">体験申込</a>
+  <a href="{{ '/#join' | relative_url }}" class="btn-join-m">体験申込</a>
 </nav>
 
 {{ content }}
