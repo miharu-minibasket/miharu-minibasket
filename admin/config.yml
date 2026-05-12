@@ -106,6 +106,28 @@ collections:
       - { label: "場所・補足", name: "sub", widget: "string", required: false }
       - { label: "月（数字）", name: "month", widget: "number", hint: "4〜12, 1〜3" }
 
+  - name: "documents"
+    label: "チーム資料"
+    label_singular: "資料"
+    folder: "_documents"
+    create: true
+    slug: "{{fields.order}}-{{fields.slug}}"
+    fields:
+      - { label: "表示順（数字）", name: "order", widget: "number", default: 1 }
+      - { label: "スラッグ（英数字・ハイフンのみ）", name: "slug", widget: "string", hint: "例: team-rules、entry-form（ファイル名になります）" }
+      - { label: "タイトル", name: "title", widget: "string", hint: "例: スポーツ少年団 規約" }
+      - { label: "説明", name: "description", widget: "text", required: false, hint: "資料の内容を簡単に説明してください" }
+      - label: "カテゴリ"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "規約・規則", value: "rules" }
+          - { label: "申込書類", value: "forms" }
+          - { label: "保護者向け", value: "parents" }
+          - { label: "その他", value: "other" }
+      - { label: "ファイル（PDF等）", name: "file", widget: "file", hint: "PDFファイルをアップロードしてください", required: false }
+      - { label: "更新日", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+
   - name: "teams"
     label: "チーム紹介設定"
     files:

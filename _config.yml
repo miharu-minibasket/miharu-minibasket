@@ -25,4 +25,6 @@ collections:
     output: false
   sponsors:
     output: false
+  documents:
+    output: false
 
