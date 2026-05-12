@@ -88,20 +88,38 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   border-top: 1px solid #f5f5f5;
 }
 
-.btn-download {
+.btn-preview {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 9px 18px;
-  background: var(--orange);
+  background: var(--primary);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: background 0.2s;
 }
-.btn-download:hover { background: #d4672f; }
+.btn-preview:hover { background: #1a1a3e; }
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: transparent;
+  border: 1.5px solid #e0e0e0;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-download:hover { border-color: var(--orange); color: var(--orange); }
 
 .docs-unavailable {
   display: inline-flex;
@@ -157,6 +175,108 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   line-height: 1.9;
 }
 .docs-notice strong { color: var(--primary); }
+
+/* PDFモーダル */
+.pdf-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.pdf-modal-overlay.active { display: flex; }
+
+.pdf-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+}
+
+.pdf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.pdf-modal-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-modal-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pdf-modal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: background 0.2s;
+}
+.pdf-modal-btn-dl {
+  background: var(--orange);
+  color: #fff;
+}
+.pdf-modal-btn-dl:hover { background: #d4672f; }
+.pdf-modal-btn-close {
+  background: #f0f0f0;
+  color: #555;
+}
+.pdf-modal-btn-close:hover { background: #e0e0e0; }
+
+.pdf-modal-body {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.pdf-modal-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* モバイル：iframeの代わりに新しいタブへ案内 */
+.pdf-modal-mobile-msg {
+  display: none;
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.8;
+}
+@media(max-width: 640px) {
+  .pdf-modal-body iframe { display: none; }
+  .pdf-modal-mobile-msg { display: block; }
+  .pdf-modal { max-height: 70vh; }
+}
 </style>
 
 <!-- ヒーロー -->
@@ -173,8 +293,6 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   <div class="container">
 
     {% assign all_docs = site.documents | sort: 'order' %}
-
-    {% comment %}カテゴリ別に表示{% endcomment %}
     {% assign categories = "rules,forms,parents,other" | split: "," %}
     {% assign category_labels = "規約・規則,申込書類,保護者向け,その他" | split: "," %}
 
@@ -208,9 +326,13 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
               {% endif %}
               <div class="docs-card-actions">
                 {% if doc.file %}
+                  <button class="btn-preview" onclick="openPdfModal('{{ doc.file | relative_url }}', '{{ doc.title | escape }}')">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    プレビュー
+                  </button>
                   <a href="{{ doc.file | relative_url }}" class="btn-download" download>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    ダウンロード
+                    保存
                   </a>
                 {% else %}
                   <span class="docs-unavailable">準備中</span>
@@ -237,3 +359,48 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 
   </div>
 </section>
+
+<!-- PDFモーダル -->
+<div class="pdf-modal-overlay" id="pdfModal">
+  <div class="pdf-modal">
+    <div class="pdf-modal-header">
+      <div class="pdf-modal-title" id="pdfModalTitle"></div>
+      <div class="pdf-modal-actions">
+        <a href="#" class="pdf-modal-btn pdf-modal-btn-dl" id="pdfModalDownload" download>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          保存
+        </a>
+        <button class="pdf-modal-btn pdf-modal-btn-close" onclick="closePdfModal()">✕ 閉じる</button>
+      </div>
+    </div>
+    <div class="pdf-modal-body">
+      <iframe id="pdfFrame" src="" title="PDFプレビュー"></iframe>
+      <div class="pdf-modal-mobile-msg">
+        <p>📄 スマートフォンでのPDFプレビューは<br>ブラウザの機能をご利用ください。</p>
+        <a href="#" id="pdfMobileOpen" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;padding:12px 24px;background:var(--orange);color:#fff;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">ブラウザで開く</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openPdfModal(url, title) {
+  document.getElementById('pdfModalTitle').textContent = title;
+  document.getElementById('pdfFrame').src = url;
+  document.getElementById('pdfModalDownload').href = url;
+  document.getElementById('pdfMobileOpen').href = url;
+  document.getElementById('pdfModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePdfModal() {
+  document.getElementById('pdfModal').classList.remove('active');
+  document.getElementById('pdfFrame').src = '';
+  document.body.style.overflow = '';
+}
+document.getElementById('pdfModal').addEventListener('click', function(e) {
+  if (e.target === this) closePdfModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePdfModal();
+});
+</script>
