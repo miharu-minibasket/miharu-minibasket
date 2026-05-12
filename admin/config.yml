@@ -135,6 +135,7 @@ collections:
         label: "チーム画像・説明"
         file: "_data/teams.yml"
         fields:
+          - { label: "ヘッダーロゴ 丸画像", name: "logo_image", widget: "image", required: false, hint: "ヘッダー左の丸いロゴに表示する画像（空欄の場合はバスケボールアイコン）" }
           - { label: "男子チーム 写真", name: "boys_image", widget: "image", hint: "トップページのチーム紹介に表示される写真" }
           - { label: "男子チーム 説明文", name: "boys_desc", widget: "string" }
           - { label: "男子チーム Instagram URL", name: "boys_instagram", widget: "string" }

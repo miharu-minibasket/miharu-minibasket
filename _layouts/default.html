@@ -20,7 +20,7 @@
 <header id="header">
   <div class="container header-inner">
     <a href="{{ '/' | relative_url }}" class="logo">
-      <div class="logo-icon"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="18" cy="18" r="16" stroke="#E8773C" stroke-width="2.5"/><path d="M18 2C18 2 12 9 12 18C12 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M18 2C18 2 24 9 24 18C24 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M2 18H34" stroke="#E8773C" stroke-width="2"/></svg></div>
+      <div class="logo-icon">{% if site.data.teams.logo_image and site.data.teams.logo_image != "" %}<img src="{{ site.data.teams.logo_image | relative_url }}" alt="ロゴ" style="width:36px;height:36px;border-radius:50%;object-fit:cover;display:block;">{% else %}<svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="18" cy="18" r="16" stroke="#E8773C" stroke-width="2.5"/><path d="M18 2C18 2 12 9 12 18C12 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M18 2C18 2 24 9 24 18C24 27 18 34 18 34" stroke="#E8773C" stroke-width="2"/><path d="M2 18H34" stroke="#E8773C" stroke-width="2"/></svg>{% endif %}</div>
       <div class="logo-text">
         <div class="en">MIHARU MINI BASKETBALL</div>
         <div class="ja">三春ミニバスケットボールスポーツ少年団</div>
