@@ -90,9 +90,11 @@
   border-radius: 50px;
   color: #fff;
 }
-.tag-boys  { background: rgba(59,130,246,0.85); }
-.tag-girls { background: rgba(236,72,153,0.75); }
-.tag-all   { background: rgba(232,119,60,0.85); }
+.tag-boys     { background: rgba(59,130,246,0.85); }
+.tag-girls    { background: rgba(236,72,153,0.75); }
+.tag-event    { background: rgba(232,119,60,0.85); }
+.tag-practice { background: rgba(34,197,94,0.85); }
+.tag-all      { background: rgba(232,119,60,0.85); }
 
 .lightbox {
   position: fixed;

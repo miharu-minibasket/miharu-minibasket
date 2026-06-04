@@ -31,13 +31,19 @@ extra_css: /css/gallery.css
 
       {% assign sorted_gallery = site.gallery | sort: 'date' | reverse %}
       {% for photo in sorted_gallery %}
-        {% assign tag_class = 'tag-all' %}
-        {% if photo.tag == 'boys' %}{% assign tag_class = 'tag-boys' %}{% endif %}
-        {% if photo.tag == 'girls' %}{% assign tag_class = 'tag-girls' %}{% endif %}
-        {% assign tag_label = '大会' %}
-        {% if photo.tag == 'boys' %}{% assign tag_label = '男子' %}{% endif %}
-        {% if photo.tag == 'girls' %}{% assign tag_label = '女子' %}{% endif %}
-        {% if photo.tag == 'practice' %}{% assign tag_label = '練習' %}{% endif %}
+        {% if photo.tag == 'boys' %}
+          {% assign tag_class = 'tag-boys' %}
+          {% assign tag_label = '男子' %}
+        {% elsif photo.tag == 'girls' %}
+          {% assign tag_class = 'tag-girls' %}
+          {% assign tag_label = '女子' %}
+        {% elsif photo.tag == 'practice' %}
+          {% assign tag_class = 'tag-practice' %}
+          {% assign tag_label = '練習' %}
+        {% else %}
+          {% assign tag_class = 'tag-event' %}
+          {% assign tag_label = '大会' %}
+        {% endif %}
         <div class="photo-card" data-tag="{{ photo.tag }}" data-label="{{ photo.title }}" data-src="{{ photo.image | relative_url }}">
           <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" loading="lazy">
           <span class="photo-card-tag {{ tag_class }}">{{ tag_label }}</span>
@@ -46,35 +52,53 @@ extra_css: /css/gallery.css
       {% endfor %}
 
       {% if site.gallery.size == 0 %}
-      <div class="photo-card" data-tag="event" data-label="2026年 春季大会" data-src="{{ '/images/gallery1.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery1.jpg' | relative_url }}" alt="春季大会" loading="lazy">
-        <span class="photo-card-tag tag-all">大会</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">2026年 春季大会</div></div>
-      </div>
-      <div class="photo-card" data-tag="practice" data-label="練習風景" data-src="{{ '/images/gallery2.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery2.jpg' | relative_url }}" alt="練習風景" loading="lazy">
-        <span class="photo-card-tag tag-all">練習</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">練習風景</div></div>
-      </div>
-      <div class="photo-card" data-tag="girls" data-label="女子チーム 練習" data-src="{{ '/images/gallery3.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery3.jpg' | relative_url }}" alt="女子チーム練習" loading="lazy">
+      <!-- 女子チーム -->
+      <div class="photo-card" data-tag="girls" data-label="女子チーム ウォームアップ" data-src="{{ '/images/IMG_8739.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8739.JPG' | relative_url }}" alt="女子チーム ウォームアップ" loading="lazy">
         <span class="photo-card-tag tag-girls">女子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 練習</div></div>
+        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム ウォームアップ</div></div>
       </div>
-      <div class="photo-card" data-tag="boys" data-label="男子チーム 試合" data-src="{{ '/images/gallery4.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery4.jpg' | relative_url }}" alt="男子チーム試合" loading="lazy">
-        <span class="photo-card-tag tag-boys">男子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">男子チーム 試合</div></div>
+      <div class="photo-card" data-tag="girls" data-label="女子チーム 試合前整列" data-src="{{ '/images/IMG_8742.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8742.JPG' | relative_url }}" alt="女子チーム 試合前整列" loading="lazy">
+        <span class="photo-card-tag tag-girls">女子</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 試合前整列</div></div>
       </div>
-      <div class="photo-card" data-tag="event" data-label="チーム集合写真" data-src="{{ '/images/gallery5.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery5.jpg' | relative_url }}" alt="チーム集合写真" loading="lazy">
+      <div class="photo-card" data-tag="girls" data-label="女子チーム 一致団結" data-src="{{ '/images/IMG_8737.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8737.JPG' | relative_url }}" alt="女子チーム 一致団結" loading="lazy">
+        <span class="photo-card-tag tag-girls">女子</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 一致団結</div></div>
+      </div>
+      <div class="photo-card" data-tag="girls" data-label="女子チーム 作戦タイム" data-src="{{ '/images/IMG_8738.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8738.JPG' | relative_url }}" alt="女子チーム 作戦タイム" loading="lazy">
+        <span class="photo-card-tag tag-girls">女子</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 作戦タイム</div></div>
+      </div>
+      <!-- 大会・イベント -->
+      <div class="photo-card" data-tag="event" data-label="福島県U12 ウィンターカップ" data-src="{{ '/images/IMG_8735.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8735.JPG' | relative_url }}" alt="福島県U12 ウィンターカップ" loading="lazy">
+        <span class="photo-card-tag tag-all">大会</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">福島県U12 ウィンターカップ</div></div>
+      </div>
+      <div class="photo-card" data-tag="event" data-label="大会会場 円陣" data-src="{{ '/images/IMG_8740.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8740.JPG' | relative_url }}" alt="大会会場 円陣" loading="lazy">
+        <span class="photo-card-tag tag-all">大会</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">大会会場 円陣</div></div>
+      </div>
+      <div class="photo-card" data-tag="event" data-label="大舞台での戦い" data-src="{{ '/images/IMG_8741.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8741.JPG' | relative_url }}" alt="大舞台での戦い" loading="lazy">
+        <span class="photo-card-tag tag-all">大会</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">大舞台での戦い</div></div>
+      </div>
+      <div class="photo-card" data-tag="event" data-label="卒団式" data-src="{{ '/images/IMG_8736.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8736.JPG' | relative_url }}" alt="卒団式" loading="lazy">
         <span class="photo-card-tag tag-all">イベント</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">チーム集合写真</div></div>
+        <div class="photo-card-overlay"><div class="photo-card-label">卒団式</div></div>
       </div>
-      <div class="photo-card" data-tag="practice" data-label="バスケットボール" data-src="{{ '/images/gallery-basketball.jpg' | relative_url }}">
-        <img src="{{ '/images/gallery-basketball.jpg' | relative_url }}" alt="バスケットボール" loading="lazy">
-        <span class="photo-card-tag tag-all">練習</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">バスケットボール</div></div>
+      <!-- コーチ・チーム全体 -->
+      <div class="photo-card" data-tag="event" data-label="コーチ陣 一致団結" data-src="{{ '/images/IMG_8734.JPG' | relative_url }}">
+        <img src="{{ '/images/IMG_8734.JPG' | relative_url }}" alt="コーチ陣 一致団結" loading="lazy">
+        <span class="photo-card-tag tag-all">チーム</span>
+        <div class="photo-card-overlay"><div class="photo-card-label">コーチ陣 一致団結</div></div>
       </div>
       {% endif %}
 

@@ -7,10 +7,17 @@ description: "福島県三春町のミニバスケットボールチーム。男
 <!-- ========== HERO ========== -->
 <section id="hero">
   <div class="hero-slides">
-    <div class="hero-slide active"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8734.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8739.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8742.JPG" | relative_url }}') center 30%/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8735.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8737.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8741.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8738.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8740.JPG" | relative_url }}') center/cover no-repeat;"></div>
+    <div class="hero-slide" style="background:url('{{ "/images/IMG_8736.JPG" | relative_url }}') center/cover no-repeat;"></div>
   </div>
+  <div class="hero-flash" id="heroFlash"></div>
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
@@ -32,6 +39,37 @@ description: "福島県三春町のミニバスケットボールチーム。男
     <span>SCROLL</span>
   </div>
 </section>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const flash = document.getElementById('heroFlash');
+  const kbClasses = ['kb1','kb2','kb3','kb4','kb5'];
+  let cur = 0;
+
+  function activate(idx) {
+    slides.forEach((s,i) => {
+      s.classList.remove('active','kb1','kb2','kb3','kb4','kb5');
+    });
+    // フラッシュ
+    flash.classList.remove('flash');
+    void flash.offsetWidth;
+    flash.classList.add('flash');
+    // Ken Burns リセット＆適用
+    const s = slides[idx];
+    s.style.animation = 'none';
+    void s.offsetWidth;
+    s.style.animation = '';
+    s.classList.add('active', kbClasses[idx % kbClasses.length]);
+  }
+
+  activate(0);
+  setInterval(() => {
+    cur = (cur + 1) % slides.length;
+    activate(cur);
+  }, 3000);
+})();
+</script>
 
 <!-- ========== NEWS ========== -->
 <section id="news" class="section">
@@ -254,39 +292,187 @@ description: "福島県三春町のミニバスケットボールチーム。男
   </div>
 </section>
 
-<!-- ========== GALLERY ========== -->
-<section id="gallery" class="section">
-  <div class="container">
-    <div class="gallery-title-wrap reveal">
-      <div class="section-label">PHOTO GALLERY</div>
-      <h2 class="section-title">フォトギャラリー</h2>
+<!-- ========== PHOTO SHOWCASE ========== -->
+<section id="gallery" class="showcase-section">
+  <div class="showcase-header reveal">
+    <div class="section-label">PHOTO GALLERY</div>
+    <h2 class="section-title">試合・活動の記録</h2>
+  </div>
+
+  <!-- メイングリッド -->
+  <div class="showcase-grid reveal">
+
+    <!-- 行1：大1枚＋小2枚 -->
+    <div class="sc-big">
+      <div class="showcase-img" style="background-image:url('{{ "/images/IMG_8734.JPG" | relative_url }}')">
+        <div class="showcase-overlay"><span class="showcase-tag">TEAM SPIRIT</span><p class="showcase-caption">一致団結、勝利へ</p></div>
+      </div>
     </div>
-    <div class="gallery-grid reveal">
-      <div class="gallery-item"><div class="gallery-thumb g1"></div></div>
-      <div class="gallery-item"><div class="gallery-thumb g2"></div></div>
-      <div class="gallery-item"><div class="gallery-thumb g3"></div></div>
-      <div class="gallery-item"><div class="gallery-thumb g4"></div></div>
-      <div class="gallery-item"><div class="gallery-thumb g5"></div></div>
+    <div class="showcase-img sc-small" style="background-image:url('{{ "/images/IMG_8742.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">GAME DAY</span><p class="showcase-caption">試合前整列</p></div>
     </div>
-    <div class="gallery-center reveal">
-      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:20px">※ チームの練習・試合写真は随時更新予定です</p>
-      <a href="{{ '/gallery.html' | relative_url }}" class="btn btn-outline" style="border-color:var(--orange);color:var(--orange)">ギャラリーを全て見る</a>
+    <div class="showcase-img sc-small" style="background-image:url('{{ "/images/IMG_8737.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">MIHARU</span><p class="showcase-caption">一致団結</p></div>
     </div>
+
+    <!-- 行2：小3枚＋大1枚 -->
+    <div class="showcase-img sc-small" style="background-image:url('{{ "/images/IMG_8739.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">PRACTICE</span><p class="showcase-caption">ウォームアップ</p></div>
+    </div>
+    <div class="showcase-img sc-small" style="background-image:url('{{ "/images/IMG_8740.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">GAME</span><p class="showcase-caption">試合会場</p></div>
+    </div>
+    <div class="showcase-img sc-small" style="background-image:url('{{ "/images/IMG_8741.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">ARENA</span><p class="showcase-caption">大舞台での戦い</p></div>
+    </div>
+    <div class="sc-big">
+      <div class="showcase-img" style="background-image:url('{{ "/images/IMG_8735.JPG" | relative_url }}')">
+        <div class="showcase-overlay"><span class="showcase-tag">TOURNAMENT</span><p class="showcase-caption">福島県U12 ウィンターカップ</p></div>
+      </div>
+    </div>
+
+    <!-- 行3：横長2枚 -->
+    <div class="showcase-img sc-wide" style="background-image:url('{{ "/images/IMG_8736.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">CEREMONY</span><p class="showcase-caption">卒団式</p></div>
+    </div>
+    <div class="showcase-img sc-wide" style="background-image:url('{{ "/images/IMG_8738.JPG" | relative_url }}')">
+      <div class="showcase-overlay"><span class="showcase-tag">COACHING</span><p class="showcase-caption">コーチからの指示</p></div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:40px;" class="reveal">
+    <a href="{{ '/gallery.html' | relative_url }}" class="btn btn-outline" style="border-color:var(--orange);color:var(--orange)">ギャラリーをもっと見る</a>
   </div>
 </section>
 
+<style>
+.showcase-section {
+  background: #08081a;
+  padding: 80px 0;
+}
+.showcase-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 24px;
+}
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 240px;
+  gap: 6px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+/* 行1：大（4列）＋小（1列）＋小（1列） */
+.sc-big { grid-column: span 4; }
+.sc-small { grid-column: span 2; }
+/* 行3：横長（3列ずつ） */
+.sc-wide { grid-column: span 3; }
+
+.showcase-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+.showcase-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+  z-index: 1;
+}
+.showcase-img:hover { transform: scale(1.03); z-index: 2; }
+.showcase-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 18px 20px;
+  z-index: 2;
+  transform: translateY(4px);
+  transition: transform 0.3s;
+}
+.showcase-img:hover .showcase-overlay { transform: translateY(0); }
+.showcase-tag {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.showcase-caption {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+@media (max-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 200px;
+    padding: 0 12px;
+  }
+  .sc-big { grid-column: span 2; }
+  .sc-small { grid-column: span 1; }
+  .sc-wide { grid-column: span 1; }
+}
+</style>
+
 <!-- ========== INSTAGRAM ========== -->
-<section id="instagram" class="section">
-  <div class="container">
-    <div class="ig-title-wrap reveal">
-      <div class="section-label">FOLLOW US</div>
-      <h2 class="section-title">Instagram</h2>
+<section id="instagram" class="ig-section">
+  <!-- 背景グラデーション装飾 -->
+  <div class="ig-bg-orb ig-bg-orb1"></div>
+  <div class="ig-bg-orb ig-bg-orb2"></div>
+  <div class="ig-bg-orb ig-bg-orb3"></div>
+
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="ig-hero-wrap reveal">
+      <div class="ig-logo-badge">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+        <span>Instagram</span>
+      </div>
+      <h2 class="ig-main-title">試合の熱気、<br>練習の汗を<br><span class="ig-gradient-text">リアルタイム発信中</span></h2>
+      <p class="ig-main-sub">選手たちの活躍をいち早く届けます。<br>フォローして一緒に応援してください！</p>
     </div>
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-f4d490f5-71ac-41d7-afc6-9aec28e29633" data-elfsight-app-lazy></div>
-    <div style="display:flex;justify-content:center;gap:24px;margin-top:32px;flex-wrap:wrap" class="reveal">
-      <a href="https://www.instagram.com/mmb_boys.2007/" target="_blank" rel="noopener" class="ig-follow">男子チームをフォロー</a>
-      <a href="https://www.instagram.com/miharu_mini_girls/" target="_blank" rel="noopener" class="ig-follow">女子チームをフォロー</a>
+
+    <div class="ig-elfsight-wrap">
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-f4d490f5-71ac-41d7-afc6-9aec28e29633" data-elfsight-app-lazy></div>
+    </div>
+
+    <div class="ig-follow-cards reveal">
+      <a href="https://www.instagram.com/mmb_boys.2007/" target="_blank" rel="noopener" class="ig-follow-card ig-follow-card-boys">
+        <div class="ig-follow-card-inner">
+          <svg class="ig-card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+          <div>
+            <div class="ig-follow-card-team">男子チーム</div>
+            <div class="ig-follow-card-account">@mmb_boys.2007</div>
+          </div>
+        </div>
+        <div class="ig-follow-card-btn">フォローする</div>
+      </a>
+      <a href="https://www.instagram.com/miharu_mini_girls/" target="_blank" rel="noopener" class="ig-follow-card ig-follow-card-girls">
+        <div class="ig-follow-card-inner">
+          <svg class="ig-card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+          <div>
+            <div class="ig-follow-card-team">女子チーム</div>
+            <div class="ig-follow-card-account">@miharu_mini_girls</div>
+          </div>
+        </div>
+        <div class="ig-follow-card-btn">フォローする</div>
+      </a>
     </div>
   </div>
 </section>
