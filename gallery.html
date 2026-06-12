@@ -51,58 +51,9 @@ extra_css: /css/gallery.css
         </div>
       {% endfor %}
 
-      {% if site.gallery.size == 0 %}
-      <!-- 女子チーム -->
-      <div class="photo-card" data-tag="girls" data-label="女子チーム ウォームアップ" data-src="{{ '/images/IMG_8739.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8739.JPG' | relative_url }}" alt="女子チーム ウォームアップ" loading="lazy">
-        <span class="photo-card-tag tag-girls">女子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム ウォームアップ</div></div>
-      </div>
-      <div class="photo-card" data-tag="girls" data-label="女子チーム 試合前整列" data-src="{{ '/images/IMG_8742.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8742.JPG' | relative_url }}" alt="女子チーム 試合前整列" loading="lazy">
-        <span class="photo-card-tag tag-girls">女子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 試合前整列</div></div>
-      </div>
-      <div class="photo-card" data-tag="girls" data-label="女子チーム 一致団結" data-src="{{ '/images/IMG_8737.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8737.JPG' | relative_url }}" alt="女子チーム 一致団結" loading="lazy">
-        <span class="photo-card-tag tag-girls">女子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 一致団結</div></div>
-      </div>
-      <div class="photo-card" data-tag="girls" data-label="女子チーム 作戦タイム" data-src="{{ '/images/IMG_8738.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8738.JPG' | relative_url }}" alt="女子チーム 作戦タイム" loading="lazy">
-        <span class="photo-card-tag tag-girls">女子</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">女子チーム 作戦タイム</div></div>
-      </div>
-      <!-- 大会・イベント -->
-      <div class="photo-card" data-tag="event" data-label="福島県U12 ウィンターカップ" data-src="{{ '/images/IMG_8735.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8735.JPG' | relative_url }}" alt="福島県U12 ウィンターカップ" loading="lazy">
-        <span class="photo-card-tag tag-all">大会</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">福島県U12 ウィンターカップ</div></div>
-      </div>
-      <div class="photo-card" data-tag="event" data-label="大会会場 円陣" data-src="{{ '/images/IMG_8740.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8740.JPG' | relative_url }}" alt="大会会場 円陣" loading="lazy">
-        <span class="photo-card-tag tag-all">大会</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">大会会場 円陣</div></div>
-      </div>
-      <div class="photo-card" data-tag="event" data-label="大舞台での戦い" data-src="{{ '/images/IMG_8741.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8741.JPG' | relative_url }}" alt="大舞台での戦い" loading="lazy">
-        <span class="photo-card-tag tag-all">大会</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">大舞台での戦い</div></div>
-      </div>
-      <div class="photo-card" data-tag="event" data-label="卒団式" data-src="{{ '/images/IMG_8736.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8736.JPG' | relative_url }}" alt="卒団式" loading="lazy">
-        <span class="photo-card-tag tag-all">イベント</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">卒団式</div></div>
-      </div>
-      <!-- コーチ・チーム全体 -->
-      <div class="photo-card" data-tag="event" data-label="コーチ陣 一致団結" data-src="{{ '/images/IMG_8734.JPG' | relative_url }}">
-        <img src="{{ '/images/IMG_8734.JPG' | relative_url }}" alt="コーチ陣 一致団結" loading="lazy">
-        <span class="photo-card-tag tag-all">チーム</span>
-        <div class="photo-card-overlay"><div class="photo-card-label">コーチ陣 一致団結</div></div>
-      </div>
-      {% endif %}
-
     </div>
+
+    <p class="gallery-empty" id="galleryEmpty" style="display:none;text-align:center;padding:60px 20px;color:#999;font-size:15px;">このカテゴリの写真はまだありません。<br>今後の更新をお楽しみに！</p>
 
     <p class="gallery-upload-note">※ 練習・試合の写真は随時追加予定です</p>
   </div>
@@ -125,9 +76,13 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const f = btn.dataset.filter;
+    let shown = 0;
     cards.forEach(c => {
-      c.style.display = (f === 'all' || c.dataset.tag === f) ? '' : 'none';
+      const show = (f === 'all' || c.dataset.tag === f);
+      c.style.display = show ? '' : 'none';
+      if (show) shown++;
     });
+    document.getElementById('galleryEmpty').style.display = shown === 0 ? 'block' : 'none';
   });
 });
 

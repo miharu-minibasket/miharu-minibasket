@@ -1,5 +1,5 @@
 .gallery-page-hero {
-  background: linear-gradient(rgba(8,8,20,0.7), rgba(8,8,20,0.85)),
+  background: linear-gradient(135deg, rgba(26,5,51,0.8), rgba(45,20,88,0.75), rgba(13,13,26,0.85)),
               url('/images/hero-sport.jpg') center/cover no-repeat;
   height: 280px;
   display: flex;
@@ -26,18 +26,18 @@
 .filter-btn {
   padding: 8px 22px;
   border-radius: 50px;
-  border: 1.5px solid #ddd;
-  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.25s;
   font-family: inherit;
-  color: #555;
+  color: rgba(255,255,255,0.7);
 }
 .filter-btn:hover, .filter-btn.active {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: linear-gradient(90deg, #F56040, #E1306C, #C13584);
+  border-color: transparent;
   color: #fff;
 }
 
@@ -146,6 +146,7 @@
 .gallery-upload-note {
   text-align: center;
   padding: 40px 0 20px;
-  color: #999;
+  color: rgba(255,255,255,0.45);
   font-size: 14px;
 }
+.gallery-empty { color: rgba(255,255,255,0.5) !important; }

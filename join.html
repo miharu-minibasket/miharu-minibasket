@@ -6,7 +6,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 
 <style>
 .join-hero {
-  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+  background: linear-gradient(135deg, rgba(26,5,51,0.85), rgba(45,20,88,0.8), rgba(13,13,26,0.88)),
               url('{{ "/images/hero-action.jpg" | relative_url }}') center/cover no-repeat;
   height: 280px;
   display: flex;
@@ -23,7 +23,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 }
 .join-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
 
-.join-section { padding: 72px 0; background: #f8f8f8; }
+.join-section { padding: 72px 0; background: transparent; }
 .join-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,7 +32,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 @media(max-width:768px){ .join-layout { grid-template-columns: 1fr; } }
 
 .info-box {
-  background: #fff;
+  background: rgba(255,255,255,0.06);
   border-radius: 16px;
   padding: 36px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
@@ -41,16 +41,16 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 .info-box h3 {
   font-size: 16px;
   font-weight: 900;
-  color: var(--primary);
+  color: #fff;
   margin-bottom: 20px;
   padding-bottom: 12px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   gap: 10px;
 }
 .info-table { width: 100%; border-collapse: collapse; }
-.info-table tr { border-bottom: 1px solid #f5f5f5; }
+.info-table tr { border-bottom: 1px solid rgba(255,255,255,0.1); }
 .info-table tr:last-child { border-bottom: none; }
 .info-table th {
   text-align: left;
@@ -63,7 +63,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 }
 .info-table td {
   font-size: 13px;
-  color: #444;
+  color: rgba(255,255,255,0.8);
   padding: 12px 0;
   line-height: 1.7;
 }
@@ -90,15 +90,15 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
   flex-shrink: 0;
   font-family: 'Bebas Neue', sans-serif;
 }
-.step-title { font-size: 15px; font-weight: 900; color: var(--primary); margin-bottom: 6px; }
-.step-text { font-size: 13px; color: #666; line-height: 1.7; }
+.step-title { font-size: 15px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.step-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
 
 /* FAQ */
-.faq-section { padding: 72px 0; background: #fff; }
+.faq-section { padding: 72px 0; background: rgba(255,255,255,0.06); }
 .faq-list { max-width: 800px; margin: 48px auto 0; }
 .faq-item {
   border-radius: 12px;
-  border: 1.5px solid #f0f0f0;
+  border: 1.5px solid rgba(255,255,255,0.15);
   margin-bottom: 12px;
   overflow: hidden;
 }
@@ -106,14 +106,14 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
   padding: 18px 24px;
   font-size: 14px;
   font-weight: 700;
-  color: var(--primary);
+  color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 12px;
   transition: background 0.2s;
 }
-.faq-q:hover { background: #fafafa; }
+.faq-q:hover { background: rgba(255,255,255,0.04); }
 .faq-q::before {
   content: "Q";
   width: 24px; height: 24px;
@@ -130,7 +130,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
 .faq-q::after {
   content: "▾";
   margin-left: auto;
-  color: #aaa;
+  color: rgba(255,255,255,0.45);
   font-size: 14px;
   transition: transform 0.25s;
 }
@@ -139,7 +139,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
   display: none;
   padding: 0 24px 18px 60px;
   font-size: 13px;
-  color: #555;
+  color: rgba(255,255,255,0.75);
   line-height: 1.9;
 }
 .faq-item.open .faq-a { display: block; }
@@ -201,7 +201,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
             <tr><th>練習日</th><td>毎週土・日曜日<br>（大会・行事により変動あり）</td></tr>
             <tr><th>練習時間</th><td>9:00〜12:00（予定）</td></tr>
             <tr><th>練習会場</th><td>三春町町民第二体育館<br>（福島県田村郡三春町）</td></tr>
-            <tr><th>月会費</th><td>月額 3,000円<br><span style="font-size:12px;color:#aaa;">※ 入団時に別途入団費あり</span></td></tr>
+            <tr><th>月会費</th><td>月額 3,000円<br><span style="font-size:12px;color: rgba(255,255,255,0.45);">※ 入団時に別途入団費あり</span></td></tr>
             <tr><th>その他費用</th><td>ユニフォーム代（入団時）<br>遠征費（大会出場時）</td></tr>
           </table>
         </div>
@@ -257,7 +257,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
         <div class="info-box">
           <h3>🎽 必要なもの</h3>
           <table class="info-table">
-            <tr><th>体験時</th><td>動きやすい服装・室内運動靴・水筒<br><span style="font-size:12px;color:#aaa;">バスケットシューズは不要です</span></td></tr>
+            <tr><th>体験時</th><td>動きやすい服装・室内運動靴・水筒<br><span style="font-size:12px;color: rgba(255,255,255,0.45);">バスケットシューズは不要です</span></td></tr>
             <tr><th>入団後</th><td>チームユニフォーム（上下）<br>バスケットシューズ<br>練習着（指定なし）</td></tr>
           </table>
         </div>
@@ -323,7 +323,7 @@ description: "三春ミニバスケットボールスポーツ少年団の入団
     <h2 class="section-title" style="text-align:center;color:#fff;">まずは体験してみよう！</h2>
     <p style="color:rgba(255,255,255,0.6);text-align:center;margin-top:16px;font-size:14px;">無料体験は随時受付中。お気軽にどうぞ。</p>
     <div class="cta-btns">
-      <a href="{{ '/trial.html' | relative_url }}" class="btn-cta-primary">体験練習を申し込む</a>
+      <a href="{{ '/trial/' | relative_url }}" class="btn-cta-primary">体験練習を申し込む</a>
       <a href="{{ '/#contact' | relative_url }}" class="btn-cta-outline">まずは質問する</a>
     </div>
   </div>

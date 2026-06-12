@@ -6,7 +6,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 
 <style>
 .docs-hero {
-  background: linear-gradient(rgba(8,8,20,0.75), rgba(8,8,20,0.88)),
+  background: linear-gradient(135deg, rgba(26,5,51,0.85), rgba(45,20,88,0.8), rgba(13,13,26,0.88)),
               url('{{ "/images/hero-action.jpg" | relative_url }}') center/cover no-repeat;
   height: 260px;
   display: flex;
@@ -23,7 +23,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 }
 .docs-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
 
-.docs-section { padding: 72px 0; background: #f8f8f8; }
+.docs-section { padding: 72px 0; background: transparent; }
 
 .docs-grid {
   display: grid;
@@ -33,11 +33,11 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 }
 
 .docs-card {
-  background: #fff;
+  background: rgba(255,255,255,0.06);
   border-radius: 16px;
   padding: 26px 28px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  border: 1.5px solid #f0f0f0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -52,7 +52,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 .docs-icon {
   width: 42px;
   height: 42px;
-  background: rgba(232,119,60,0.1);
+  background: rgba(225,48,108,0.18);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -63,19 +63,19 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 .docs-card-title {
   font-size: 15px;
   font-weight: 900;
-  color: var(--primary);
+  color: #fff;
   line-height: 1.4;
 }
 
 .docs-card-meta {
   font-size: 11px;
-  color: #aaa;
+  color: rgba(255,255,255,0.45);
   margin-top: 3px;
 }
 
 .docs-card-desc {
   font-size: 13px;
-  color: #666;
+  color: rgba(255,255,255,0.65);
   line-height: 1.75;
 }
 
@@ -85,7 +85,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   flex-wrap: wrap;
   margin-top: auto;
   padding-top: 12px;
-  border-top: 1px solid #f5f5f5;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .btn-preview {
@@ -93,7 +93,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   align-items: center;
   gap: 6px;
   padding: 9px 18px;
-  background: var(--primary);
+  background: linear-gradient(90deg, #E1306C, #C13584);
   color: #fff;
   font-size: 12px;
   font-weight: 700;
@@ -101,9 +101,9 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
 }
-.btn-preview:hover { background: #1a1a3e; }
+.btn-preview:hover { opacity: 0.85; }
 
 .btn-download {
   display: inline-flex;
@@ -111,8 +111,8 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   gap: 6px;
   padding: 9px 18px;
   background: transparent;
-  border: 1.5px solid #e0e0e0;
-  color: #555;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75);
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
@@ -126,8 +126,8 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   align-items: center;
   gap: 6px;
   padding: 9px 18px;
-  background: #f5f5f5;
-  color: #aaa;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.4);
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
@@ -136,7 +136,7 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
 .category-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--orange);
+  color: #ff7eb0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 52px;
@@ -150,31 +150,32 @@ description: "三春ミニバスケットボールスポーツ少年団の規約
   display: block;
   flex: 1;
   height: 1px;
-  background: #e8e8e8;
+  background: rgba(255,255,255,0.15);
 }
 
 .docs-empty {
-  background: #fff;
+  background: rgba(255,255,255,0.04);
   border-radius: 14px;
   padding: 36px;
   text-align: center;
-  color: #aaa;
+  color: rgba(255,255,255,0.45);
   font-size: 13px;
-  border: 1.5px dashed #e0e0e0;
+  border: 1.5px dashed rgba(255,255,255,0.2);
 }
 
 .docs-notice {
-  background: #fff;
+  background: rgba(255,255,255,0.06);
   border-radius: 14px;
   padding: 28px 32px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  border-left: 4px solid var(--orange);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: 4px solid #E1306C;
   margin-top: 48px;
   font-size: 13px;
-  color: #555;
+  color: rgba(255,255,255,0.65);
   line-height: 1.9;
 }
-.docs-notice strong { color: var(--primary); }
+.docs-notice strong { color: #fff; }
 
 /* PDFモーダル */
 .pdf-modal-overlay {

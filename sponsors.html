@@ -6,7 +6,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
 
 <style>
 .sponsors-hero {
-  background: linear-gradient(rgba(8,8,20,0.72), rgba(8,8,20,0.88)),
+  background: linear-gradient(135deg, rgba(26,5,51,0.85), rgba(45,20,88,0.8), rgba(13,13,26,0.88)),
               url('{{ "/images/hero-sport.jpg" | relative_url }}') center/cover no-repeat;
   height: 280px;
   display: flex;
@@ -24,7 +24,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
 .sponsors-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
 
 /* プラン説明 */
-.plan-section { padding: 72px 0 48px; background: #f8f8f8; }
+.plan-section { padding: 72px 0 48px; background: transparent; }
 .plan-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -34,7 +34,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
 @media(max-width:768px){ .plan-grid { grid-template-columns: 1fr; } }
 
 .plan-card {
-  background: #fff;
+  background: rgba(255,255,255,0.06);
   border-radius: 16px;
   padding: 32px 28px;
   text-align: center;
@@ -54,19 +54,19 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
   border-radius: 50px;
   margin-bottom: 16px;
 }
-.plan-card.gold .plan-badge { background: #fef3c7; color: #92400e; }
-.plan-card.silver .plan-badge { background: #f1f5f9; color: #475569; }
-.plan-card.bronze .plan-badge { background: #fdf2e9; color: #8b4513; }
+.plan-card.gold .plan-badge { background: rgba(251,191,36,0.2); color: #fcd34d; }
+.plan-card.silver .plan-badge { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+.plan-card.bronze .plan-badge { background: rgba(180,83,9,0.25); color: #fdba74; }
 .plan-icon { font-size: 36px; margin-bottom: 12px; display: block; }
-.plan-name { font-size: 20px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
+.plan-name { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px; }
 .plan-price { font-size: 26px; font-weight: 900; color: var(--orange); margin-bottom: 20px; }
-.plan-price span { font-size: 13px; color: #aaa; font-weight: 400; }
+.plan-price span { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 400; }
 .plan-features { text-align: left; list-style: none; padding: 0; }
 .plan-features li {
   font-size: 13px;
-  color: #555;
+  color: rgba(255,255,255,0.75);
   padding: 7px 0;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -75,7 +75,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
 .plan-features li::before { content: "✓"; color: var(--orange); font-weight: 900; flex-shrink: 0; }
 
 /* 協賛企業一覧 */
-.sponsors-list-section { padding: 72px 0; background: #fff; }
+.sponsors-list-section { padding: 72px 0; background: rgba(255,255,255,0.06); }
 
 .sponsor-tier { margin-bottom: 60px; }
 .tier-heading {
@@ -84,7 +84,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
   gap: 14px;
   margin-bottom: 28px;
   padding-bottom: 12px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid rgba(255,255,255,0.12);
 }
 .tier-label {
   font-size: 11px;
@@ -93,10 +93,10 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
   padding: 4px 14px;
   border-radius: 50px;
 }
-.tier-gold .tier-label { background: #fef3c7; color: #92400e; }
-.tier-silver .tier-label { background: #f1f5f9; color: #475569; }
-.tier-bronze .tier-label { background: #fdf2e9; color: #8b4513; }
-.tier-title { font-size: 18px; font-weight: 900; color: var(--primary); }
+.tier-gold .tier-label { background: rgba(251,191,36,0.2); color: #fcd34d; }
+.tier-silver .tier-label { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+.tier-bronze .tier-label { background: rgba(180,83,9,0.25); color: #fdba74; }
+.tier-title { font-size: 18px; font-weight: 900; color: #fff; }
 
 .sponsor-grid {
   display: grid;
@@ -117,7 +117,7 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
 }
 
 .sponsor-card {
-  background: #f8f8f8;
+  background: transparent;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
@@ -143,12 +143,12 @@ description: "三春ミニバスケットボールスポーツ少年団の活動
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  background: #eee;
+  background: rgba(255,255,255,0.12);
   border-radius: 8px;
   font-size: 12px;
-  color: #aaa;
+  color: rgba(255,255,255,0.45);
 }
-.sponsor-name { font-size: 14px; font-weight: 700; color: var(--primary); }
+.sponsor-name { font-size: 14px; font-weight: 700; color: #fff; }
 
 /* 募集セクション */
 .recruit-section {
