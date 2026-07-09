@@ -39,15 +39,9 @@ mobileMenu.querySelectorAll('a').forEach(a => {
   });
 });
 
-/* ===== HERO SLIDESHOW ===== */
-const slides = document.querySelectorAll('.hero-slide');
-let current = 0;
-function nextSlide() {
-  slides[current].classList.remove('active');
-  current = (current + 1) % slides.length;
-  slides[current].classList.add('active');
-}
-setInterval(nextSlide, 5000);
+/* ===== HERO SLIDESHOW =====
+   ヒーローのスライドショーは index.html 内のスクリプトで制御しています
+   （Ken Burns効果＋クロスフェード付き）。二重制御を防ぐためここでは扱いません。 */
 
 /* ===== AUTO NEW BADGE (7日以内) ===== */
 document.querySelectorAll('.news-item').forEach(item => {

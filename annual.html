@@ -9,7 +9,7 @@ extra_css: /css/annual.css
 <div class="annual-hero">
   <div>
     <div class="section-label">ANNUAL SCHEDULE</div>
-    <h1>2026年度 年間予定</h1>
+    <h1>{{ site.data.annual.year_label }} 年間予定</h1>
     <p>大会・練習会・イベントの年間スケジュール一覧</p>
   </div>
 </div>
@@ -35,265 +35,42 @@ extra_css: /css/annual.css
       </button>
     </div>
 
-    <!-- 月別スケジュール -->
+    <!-- 月別スケジュール（_data/annual.yml から自動生成） -->
     <div id="scheduleBody">
 
-      <!-- 4月 -->
-      <div class="annual-month" data-month="4">
-        <div class="month-heading">
-          <div class="month-num">04</div>
-          <div class="month-ja">4月</div>
-          <div class="month-count">Apr 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="event">
-            <div class="event-date">4/5〜6<span class="day">土・日</span></div>
-            <div><div class="event-title">福島県春季ミニバスケットボール選手権大会</div><div class="event-sub">会場：福島市</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">4/12<span class="day">日</span></div>
-            <div><div class="event-title">2026年度 保護者会・チーム総会</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">4/19<span class="day">日</span></div>
-            <div><div class="event-title">新入団員 体験練習会</div><div class="event-sub">未経験・体験希望者歓迎</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-        </div>
-      </div>
+      {% assign fiscal_months = "4,5,6,7,8,9,10,11,12,1,2,3" | split: "," %}
+      {% assign month_en = "Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,Jan,Feb,Mar" | split: "," %}
+      {% assign base_year = site.data.annual.year_label | remove: "年度" | plus: 0 %}
 
-      <!-- 5月 -->
-      <div class="annual-month" data-month="5">
-        <div class="month-heading">
-          <div class="month-num">05</div>
-          <div class="month-ja">5月</div>
-          <div class="month-count">May 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="event">
-            <div class="event-date">5/3〜4<span class="day">日・月祝</span></div>
-            <div><div class="event-title">田村地区ミニバスケットボール交流大会</div><div class="event-sub">会場：田村市総合体育館</div></div>
-            <span class="event-badge badge-event">大会</span>
+      {% for m in fiscal_months %}
+        {% assign mnum = m | plus: 0 %}
+        {% assign monthEvents = site.data.annual.events | where: "month", mnum %}
+        {% if monthEvents.size > 0 %}
+          {% if mnum <= 3 %}{% assign disp_year = base_year | plus: 1 %}{% else %}{% assign disp_year = base_year %}{% endif %}
+          <div class="annual-month" data-month="{{ mnum }}">
+            <div class="month-heading">
+              <div class="month-num">{% if mnum < 10 %}0{% endif %}{{ mnum }}</div>
+              <div class="month-ja">{{ mnum }}月</div>
+              <div class="month-count">{{ month_en[forloop.index0] }} {{ disp_year }}</div>
+            </div>
+            <div class="event-list">
+              {% for ev in monthEvents %}
+                {% case ev.tag %}
+                  {% when "boys" %}{% assign badge_class = "badge-boys" %}{% assign badge_label = "男子" %}{% assign filter_tag = "boys" %}
+                  {% when "girls" %}{% assign badge_class = "badge-girls" %}{% assign badge_label = "女子" %}{% assign filter_tag = "girls" %}
+                  {% when "event" %}{% assign badge_class = "badge-event" %}{% assign badge_label = "大会" %}{% assign filter_tag = "event" %}
+                  {% else %}{% assign badge_class = "badge-all" %}{% assign badge_label = "全体" %}{% assign filter_tag = "all" %}
+                {% endcase %}
+                <div class="event-item" data-tag="{{ filter_tag }}">
+                  <div class="event-date">{{ ev.date }}{% if ev.day %}<span class="day">{{ ev.day }}</span>{% endif %}</div>
+                  <div><div class="event-title">{{ ev.title }}</div>{% if ev.sub %}<div class="event-sub">{{ ev.sub }}</div>{% endif %}</div>
+                  <span class="event-badge {{ badge_class }}">{{ badge_label }}</span>
+                </div>
+              {% endfor %}
+            </div>
           </div>
-          <div class="event-item" data-tag="boys">
-            <div class="event-date">5/17〜18<span class="day">土・日</span></div>
-            <div><div class="event-title">【男子】郡山地区招待大会</div><div class="event-sub">会場：郡山市</div></div>
-            <span class="event-badge badge-boys">男子</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6月 -->
-      <div class="annual-month" data-month="6">
-        <div class="month-heading">
-          <div class="month-num">06</div>
-          <div class="month-ja">6月</div>
-          <div class="month-count">Jun 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="event">
-            <div class="event-date">6/7〜8<span class="day">土・日</span></div>
-            <div><div class="event-title">福島県ミニバスケットボール選手権大会（予選）</div><div class="event-sub">会場：未定</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-          <div class="event-item" data-tag="girls">
-            <div class="event-date">6/21〜22<span class="day">土・日</span></div>
-            <div><div class="event-title">【女子】田村地区招待大会</div><div class="event-sub">会場：三春町町民第二体育館</div></div>
-            <span class="event-badge badge-girls">女子</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7月 -->
-      <div class="annual-month" data-month="7">
-        <div class="month-heading">
-          <div class="month-num">07</div>
-          <div class="month-ja">7月</div>
-          <div class="month-count">Jul 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="all">
-            <div class="event-date">7/19〜20<span class="day">土・日</span></div>
-            <div><div class="event-title">夏合宿（1泊2日）</div><div class="event-sub">場所：調整中</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="event">
-            <div class="event-date">7/26〜27<span class="day">土・日</span></div>
-            <div><div class="event-title">福島県ミニバスケットボール選手権大会（本戦）</div><div class="event-sub">会場：福島市</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8月 -->
-      <div class="annual-month" data-month="8">
-        <div class="month-heading">
-          <div class="month-num">08</div>
-          <div class="month-ja">8月</div>
-          <div class="month-count">Aug 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="all">
-            <div class="event-date">8/1〜31<span class="day">夏季</span></div>
-            <div><div class="event-title">夏季休暇（練習お休み期間）</div><div class="event-sub">※ 合同練習等は別途お知らせ</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 9月 -->
-      <div class="annual-month" data-month="9">
-        <div class="month-heading">
-          <div class="month-num">09</div>
-          <div class="month-ja">9月</div>
-          <div class="month-count">Sep 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="all">
-            <div class="event-date">9/7<span class="day">日</span></div>
-            <div><div class="event-title">練習再開・シーズン後半スタート</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="event">
-            <div class="event-date">9/20〜21<span class="day">土・日</span></div>
-            <div><div class="event-title">秋季地区交流大会</div><div class="event-sub">会場：未定</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 10月 -->
-      <div class="annual-month" data-month="10">
-        <div class="month-heading">
-          <div class="month-num">10</div>
-          <div class="month-ja">10月</div>
-          <div class="month-count">Oct 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="boys">
-            <div class="event-date">10/4〜5<span class="day">土・日</span></div>
-            <div><div class="event-title">【男子】秋季招待大会</div><div class="event-sub">会場：調整中</div></div>
-            <span class="event-badge badge-boys">男子</span>
-          </div>
-          <div class="event-item" data-tag="girls">
-            <div class="event-date">10/18〜19<span class="day">土・日</span></div>
-            <div><div class="event-title">【女子】秋季招待大会</div><div class="event-sub">会場：調整中</div></div>
-            <span class="event-badge badge-girls">女子</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 11月 -->
-      <div class="annual-month" data-month="11">
-        <div class="month-heading">
-          <div class="month-num">11</div>
-          <div class="month-ja">11月</div>
-          <div class="month-count">Nov 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="event">
-            <div class="event-date">11/1〜3<span class="day">土〜祝</span></div>
-            <div><div class="event-title">東北ブロックミニバスケットボール大会（予選）</div><div class="event-sub">会場：仙台市（予定）</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">11/23<span class="day">日・祝</span></div>
-            <div><div class="event-title">チームOB・保護者交流試合</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 12月 -->
-      <div class="annual-month" data-month="12">
-        <div class="month-heading">
-          <div class="month-num">12</div>
-          <div class="month-ja">12月</div>
-          <div class="month-count">Dec 2026</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="event">
-            <div class="event-date">12/6〜7<span class="day">土・日</span></div>
-            <div><div class="event-title">福島県ミニバスケットボール新人大会</div><div class="event-sub">会場：未定</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">12/23<span class="day">火</span></div>
-            <div><div class="event-title">年末お楽しみ会・練習納め</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1月 -->
-      <div class="annual-month" data-month="1">
-        <div class="month-heading">
-          <div class="month-num">01</div>
-          <div class="month-ja">1月</div>
-          <div class="month-count">Jan 2027</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="all">
-            <div class="event-date">1/10<span class="day">土</span></div>
-            <div><div class="event-title">練習始め・新年初練習</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="event">
-            <div class="event-date">1/17〜18<span class="day">土・日</span></div>
-            <div><div class="event-title">田村地区新人大会</div><div class="event-sub">会場：調整中</div></div>
-            <span class="event-badge badge-event">大会</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2月 -->
-      <div class="annual-month" data-month="2">
-        <div class="month-heading">
-          <div class="month-num">02</div>
-          <div class="month-ja">2月</div>
-          <div class="month-count">Feb 2027</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="boys">
-            <div class="event-date">2/7〜8<span class="day">土・日</span></div>
-            <div><div class="event-title">【男子】卒業記念大会</div><div class="event-sub">会場：調整中</div></div>
-            <span class="event-badge badge-boys">男子</span>
-          </div>
-          <div class="event-item" data-tag="girls">
-            <div class="event-date">2/21〜22<span class="day">土・日</span></div>
-            <div><div class="event-title">【女子】卒業記念大会</div><div class="event-sub">会場：調整中</div></div>
-            <span class="event-badge badge-girls">女子</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3月 -->
-      <div class="annual-month" data-month="3">
-        <div class="month-heading">
-          <div class="month-num">03</div>
-          <div class="month-ja">3月</div>
-          <div class="month-count">Mar 2027</div>
-        </div>
-        <div class="event-list">
-          <div class="event-item" data-tag="all">
-            <div class="event-date">3/8<span class="day">日</span></div>
-            <div><div class="event-title">卒団式・6年生送る会</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">3/21〜22<span class="day">土・日</span></div>
-            <div><div class="event-title">年度末ファミリー交流試合</div><div class="event-sub">三春町町民第二体育館</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-          <div class="event-item" data-tag="all">
-            <div class="event-date">3/31<span class="day">火</span></div>
-            <div><div class="event-title">2026年度 活動終了</div><div class="event-sub">翌年度は4月より開始予定</div></div>
-            <span class="event-badge badge-all">全体</span>
-          </div>
-        </div>
-      </div>
+        {% endif %}
+      {% endfor %}
 
     </div><!-- /scheduleBody -->
 

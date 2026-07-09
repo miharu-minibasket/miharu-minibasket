@@ -120,16 +120,18 @@ a  { text-decoration: none; color: inherit; }
 }
 .logo-text .ja { font-size: 13px; font-weight: 700; }
 
-.nav { display: flex; align-items: center; gap: 4px; }
+.nav { display: flex; align-items: center; gap: 2px; }
 .nav a {
   color: rgba(255,255,255,0.85);
   font-size: 13px;
   font-weight: 500;
-  padding: 8px 14px;
+  padding: 8px 10px;
   border-radius: var(--radius);
   transition: var(--transition);
+  white-space: nowrap;
 }
 .nav a:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+.nav-dropdown-trigger { white-space: nowrap; }
 .nav .btn-join {
   background: var(--orange);
   color: var(--white);
@@ -260,11 +262,14 @@ a  { text-decoration: none; color: inherit; }
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 0.7s ease;
+  transition: opacity 1.6s ease;
   will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .hero-slide.active {
   opacity: 1;
+  z-index: 1;
 }
 
 /* Ken Burns バリエーション（5種） */
@@ -274,23 +279,13 @@ a  { text-decoration: none; color: inherit; }
 @keyframes kb4 { from { transform: scale(1.1) translate(0%,2%); } to { transform: scale(1.0) translate(0%,-2%); } }
 @keyframes kb5 { from { transform: scale(1.0) translate(1%,-1%); } to { transform: scale(1.13) translate(-2%,1%); } }
 
-.hero-slide.active.kb1 { animation: kb1 3.5s ease forwards; }
-.hero-slide.active.kb2 { animation: kb2 3.5s ease forwards; }
-.hero-slide.active.kb3 { animation: kb3 3.5s ease forwards; }
-.hero-slide.active.kb4 { animation: kb4 3.5s ease forwards; }
-.hero-slide.active.kb5 { animation: kb5 3.5s ease forwards; }
+/* Ken Burns は active に依存させない（フェードアウト中も最終状態を保持しカクつきを防ぐ） */
+.hero-slide.kb1 { animation: kb1 8s ease-out forwards; }
+.hero-slide.kb2 { animation: kb2 8s ease-out forwards; }
+.hero-slide.kb3 { animation: kb3 8s ease-out forwards; }
+.hero-slide.kb4 { animation: kb4 8s ease-out forwards; }
+.hero-slide.kb5 { animation: kb5 8s ease-out forwards; }
 
-/* フラッシュ演出 */
-@keyframes heroFlash { 0%{opacity:0} 20%{opacity:0.55} 100%{opacity:0} }
-.hero-flash {
-  position: absolute;
-  inset: 0;
-  background: #fff;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 5;
-}
-.hero-flash.flash { animation: heroFlash 0.4s ease forwards; }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -350,7 +345,29 @@ a  { text-decoration: none; color: inherit; }
   margin-bottom: 40px;
   letter-spacing: 0.05em;
 }
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+/* 練習試合ボタンの前の区切りスペース */
+.hero-btn-sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 6px;
+}
+.btn-match {
+  background: linear-gradient(90deg, #F56040, #E1306C, #C13584);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(225,48,108,0.35);
+}
+.btn-match:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(225,48,108,0.5);
+  opacity: 0.95;
+}
+@media(max-width:600px){
+  .hero-btn-sep { display: none; }
+}
 
 .hero-scroll {
   position: absolute;
@@ -459,11 +476,11 @@ a  { text-decoration: none; color: inherit; }
 }
 .team-boys .team-visual {
   background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 60%, transparent 100%),
-              url('../images/gallery4.jpg') center/cover no-repeat;
+              url('../images/DSC01411.jpg') center/cover no-repeat;
 }
 .team-girls .team-visual {
   background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 60%, transparent 100%),
-              url('../images/gallery1.jpg') center/cover no-repeat;
+              url('../images/DSC01755.jpg') center/cover no-repeat;
 }
 .team-visual::before { content: none; }
 .team-info {
@@ -560,7 +577,7 @@ a  { text-decoration: none; color: inherit; }
 }
 .philosophy-bg {
   background: linear-gradient(135deg, rgba(26,5,51,0.88), rgba(45,20,88,0.82), rgba(13,13,26,0.9)),
-              url('../images/gallery-basketball.jpg') center/cover no-repeat;
+              url('../images/DSC01017.jpg') center/cover no-repeat;
   padding: 110px 0;
 }
 .philosophy-inner {
@@ -625,7 +642,7 @@ a  { text-decoration: none; color: inherit; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../images/hero-sport.jpg') center/cover no-repeat;
+  background: url('../images/DSC01951.jpg') center/cover no-repeat;
   opacity: 0.06;
   pointer-events: none;
 }
@@ -1113,6 +1130,11 @@ footer {
 }
 
 /* ===== RESPONSIVE ===== */
+/* ナビが窮屈になる中サイズ画面ではハンバーガーに切替 */
+@media (max-width: 1040px) {
+  .nav { display: none; }
+  .hamburger { display: flex; }
+}
 @media (max-width: 900px) {
   .teams-grid    { grid-template-columns: 1fr; }
   .schedule-grid { grid-template-columns: 1fr; }

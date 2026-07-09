@@ -1,0 +1,315 @@
+---
+layout: default
+title: "練習試合のご相談"
+description: "三春ミニバスケットボールスポーツ少年団への練習試合・合同練習のお申し込みフォーム。近隣チームからのご相談を随時受け付けています。"
+---
+
+<style>
+.pm-hero {
+  background: linear-gradient(135deg, rgba(26,5,51,0.85), rgba(45,20,88,0.8), rgba(13,13,26,0.88)),
+              url('{{ "/images/DSC01667.jpg" | relative_url }}') center/cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.pm-hero h1 {
+  font-size: clamp(28px,5vw,48px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.pm-hero p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 10px; }
+
+.pm-section { padding: 72px 0; background: transparent; }
+.pm-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: start;
+}
+@media(max-width:768px){ .pm-layout { grid-template-columns: 1fr; gap: 40px; } }
+
+/* 案内ボックス */
+.pm-info-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.pm-info-item { display: flex; gap: 16px; align-items: flex-start; }
+.pm-info-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(225,48,108,0.15);
+  border-radius: 12px;
+}
+.pm-info-label { font-size: 12px; color: #ff7eb0; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 4px; }
+.pm-info-value { font-size: 16px; font-weight: 700; color: #fff; }
+.pm-info-note { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 3px; line-height: 1.6; }
+
+/* フォーム */
+.pm-form-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 36px;
+}
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+}
+.form-label .required {
+  font-size: 10px;
+  background: var(--magenta);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.form-label .optional {
+  font-size: 10px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-size: 15px;
+  color: #fff;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.35); }
+.form-select option { background: #1d1240; color: #fff; }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--magenta);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 3px rgba(225,48,108,0.18);
+}
+.form-textarea { min-height: 110px; resize: vertical; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media(max-width:480px){ .form-row { grid-template-columns: 1fr; } }
+.form-hint {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 6px;
+}
+
+/* ラジオ・チェック（対象カテゴリ） */
+.pm-radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.pm-radio {
+  flex: 1;
+  min-width: 90px;
+  position: relative;
+}
+.pm-radio input { position: absolute; opacity: 0; }
+.pm-radio label {
+  display: block;
+  text-align: center;
+  padding: 12px 8px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pm-radio input:checked + label {
+  background: linear-gradient(90deg, #E1306C, #C13584);
+  border-color: transparent;
+  color: #fff;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: #d4672f; }
+.form-submit:active { transform: scale(0.99); }
+.form-privacy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  margin-top: 18px;
+  text-align: center;
+}
+</style>
+
+<!-- ヒーロー -->
+<div class="pm-hero">
+  <div>
+    <div class="section-label">PRACTICE MATCH</div>
+    <h1>練習試合のご相談</h1>
+    <p>近隣チームの皆様へ / 練習試合・合同練習を随時受付中</p>
+  </div>
+</div>
+
+<!-- メイン -->
+<section class="pm-section">
+  <div class="container">
+    <div class="pm-layout">
+
+      <!-- 案内情報 -->
+      <div>
+        <div class="section-label">ABOUT</div>
+        <h2 class="section-title" style="margin-bottom:28px;">練習試合について</h2>
+
+        <div class="pm-info-box">
+          <div class="pm-info-item">
+            <div class="pm-info-icon">🏀</div>
+            <div>
+              <div class="pm-info-label">対象</div>
+              <div class="pm-info-value">ミニバスチーム全般</div>
+              <div class="pm-info-note">男子・女子どちらも歓迎。学年・実力は問いません。</div>
+            </div>
+          </div>
+          <div class="pm-info-item">
+            <div class="pm-info-icon">📍</div>
+            <div>
+              <div class="pm-info-label">会場</div>
+              <div class="pm-info-value">三春町町民第二体育館 ほか</div>
+              <div class="pm-info-note">当方会場・貴チーム会場、どちらでも調整可能です。</div>
+            </div>
+          </div>
+          <div class="pm-info-item">
+            <div class="pm-info-icon">📅</div>
+            <div>
+              <div class="pm-info-label">日程</div>
+              <div class="pm-info-value">土・日曜が中心</div>
+              <div class="pm-info-note">ご希望の日程をお知らせください。調整してご返信します。</div>
+            </div>
+          </div>
+          <div class="pm-info-item">
+            <div class="pm-info-icon">✉️</div>
+            <div>
+              <div class="pm-info-label">お返事</div>
+              <div class="pm-info-value">2〜3日以内にご連絡</div>
+              <div class="pm-info-note">担当より日程・会場の調整のご連絡を差し上げます。</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#E1306C,#833AB4);border-radius:12px;padding:24px;margin-top:24px;color:#fff;">
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;opacity:0.85;">MESSAGE</div>
+          <p style="font-size:14px;line-height:1.8;">子どもたちの成長には、たくさんの試合経験が一番。<br>近隣チームの皆様、ぜひお気軽にご相談ください。一緒に良い試合をつくりましょう！</p>
+        </div>
+      </div>
+
+      <!-- 申込フォーム -->
+      <div>
+        <div class="section-label">CONTACT FORM</div>
+        <h2 class="section-title" style="margin-bottom:28px;">練習試合 お申し込み</h2>
+
+        <div class="pm-form-box">
+          <!-- Netlify Forms: data-netlify="true" で自動受信 -->
+          <form name="practice-match" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/">
+            <input type="hidden" name="form-name" value="practice-match">
+            <p hidden><label>この項目は空のままにしてください： <input name="bot-field"></label></p>
+
+            <div class="form-group">
+              <label class="form-label">チーム名<span class="required">必須</span></label>
+              <input type="text" name="team_name" class="form-input" placeholder="例：〇〇ミニバスケットボールスポーツ少年団" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ご希望の対象チーム<span class="required">必須</span></label>
+              <div class="pm-radio-group">
+                <div class="pm-radio">
+                  <input type="radio" id="cat-boys" name="opponent_category" value="男子" required>
+                  <label for="cat-boys">男子</label>
+                </div>
+                <div class="pm-radio">
+                  <input type="radio" id="cat-girls" name="opponent_category" value="女子">
+                  <label for="cat-girls">女子</label>
+                </div>
+                <div class="pm-radio">
+                  <input type="radio" id="cat-both" name="opponent_category" value="男女両方">
+                  <label for="cat-both">男女両方</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">代表者・ご担当者名<span class="required">必須</span></label>
+              <input type="text" name="representative" class="form-input" placeholder="例：三春 太郎（監督）" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ご連絡先<span class="required">必須</span></label>
+              <div class="form-row">
+                <input type="email" name="email" class="form-input" placeholder="メールアドレス" required>
+                <input type="tel" name="phone" class="form-input" placeholder="電話番号（任意）">
+              </div>
+              <div class="form-hint">メールアドレスは必須です。折り返しご連絡します。</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ご希望の日程<span class="required">必須</span></label>
+              <input type="text" name="preferred_date" class="form-input" placeholder="例：7月中の土日、8/9(土) 午前など" required>
+              <div class="form-hint">候補を複数いただけると調整がスムーズです。</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">会場のご提供<span class="optional">任意</span></label>
+              <select name="venue_offer" class="form-select">
+                <option value="">選択してください</option>
+                <option value="当チームで会場を用意できる">当チームで会場を用意できる</option>
+                <option value="三春側の会場を希望">三春側の会場を希望したい</option>
+                <option value="どちらでも可">どちらでも可</option>
+                <option value="相談したい">相談したい</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">メッセージ・ご要望<span class="optional">任意</span></label>
+              <textarea name="message" class="form-textarea" placeholder="学年・人数・試合形式のご希望、その他ご質問などお気軽にどうぞ。"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">この内容で相談を送信する →</button>
+
+            <p class="form-privacy">
+              ご記入いただいた情報は練習試合の日程・会場調整のご連絡のみに使用します。<br>
+              第三者への提供・営業目的への使用は一切行いません。
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

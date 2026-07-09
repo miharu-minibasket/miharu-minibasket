@@ -1,0 +1,50 @@
+---
+layout: default
+title: "送信完了"
+description: "お問い合わせありがとうございます。"
+permalink: /thanks/
+---
+
+<style>
+.thanks-wrap {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 20px 100px;
+  background: var(--bg-grad);
+}
+.thanks-card {
+  max-width: 560px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 56px 40px;
+}
+.thanks-icon {
+  width: 84px; height: 84px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E1306C, #833AB4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px;
+}
+.thanks-card h1 { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 16px; }
+.thanks-card p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 8px; }
+.thanks-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+</style>
+
+<div class="thanks-wrap">
+  <div class="thanks-card">
+    <div class="thanks-icon">✓</div>
+    <h1>送信が完了しました</h1>
+    <p>お問い合わせ・お申し込みありがとうございます。<br>
+       担当者が内容を確認し、2〜3日以内にご連絡いたします。</p>
+    <p style="font-size:13px;color:rgba(255,255,255,0.5);">
+      ※ メールが届かない場合は、迷惑メールフォルダをご確認ください。</p>
+    <div class="thanks-btns">
+      <a href="{{ '/' | relative_url }}" class="btn btn-primary">トップページへ戻る</a>
+    </div>
+  </div>
+</div>
